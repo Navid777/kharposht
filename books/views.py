@@ -106,15 +106,18 @@ def contact_us(request):
 
 def books_by_subject(request, id):
     books = Book.objects.filter(subjects=id)
-    return render(request, 'book_list.html', {'books':books})
+    title = Subject.objects.get(id=id).name
+    return render(request, 'book_list.html', {'books':books, 'title':title})
 
 def not_published_books(request):
     books = Book.objects.filter(published=False)
-    return render(request, 'book_list.html', {'books':books})
+    title = "منتشرنشده"
+    return render(request, 'book_list.html', {'books':books, 'title':title})
 
 def published_books(request):
     books = Book.objects.filter(published=True)
-    return render(request, 'book_list.html', {'books':books})
+    title="منتشرشده"
+    return render(request, 'book_list.html', {'books':books, 'title':title})
 
 def about_us(request):
     return render(request, 'about_us.html')
