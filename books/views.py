@@ -86,7 +86,6 @@ def all_books(request):
     title="همه‌ی ِکتاب‌ها"
     return render(request, 'book_list.html', {
         'books': books,
-        'book_width': book_width,
         'title':title,
     })
 
