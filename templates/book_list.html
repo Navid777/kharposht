@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<article class="transparent">
+	
+{% include 'partials/books.html' with books=books width=book_width title=title %}
+
+
+</article>
+{% endblock %}
+

@@ -1,0 +1,88 @@
+<div class="container book-shelf">
+	<div class="row">
+		<div class="col-sm-12 col-md-12">
+			<h3 class="centered">{{title}}</h3>
+		</div>
+	</div>
+<!--
+	<div class="row books">
+		{% for b in books %}
+		<div class="centered col-sm-{{width}} col-md-{{width}}">
+			<div class="book-shelf-book">
+				<a href="/books/{{b.id}}/">
+					<img alt="{{b.title}}"
+					     src="{{b.image.url}}">
+				</a>
+				
+				<div>
+					<a href="/books/{{b.id}}/">
+						<strong>{{b.title}}</strong>
+					</a>
+				</div>
+				<div class="book_authors">
+					نویسنده:
+					{% for a in b.authors.all %}
+					<a href="/authors/{{a.id}}/">{{a.full_name}}</a>
+					{% if not forloop.last %}, {% endif %}
+					{% endfor %}
+					{% ifnotequal b.translators.count 0%}
+					<br>
+					مترجم:
+					{% for t in b.translators.all%}
+					<a href="/authors/{{t.id}}">{{t.full_name}}</a>
+					{% if not forloop.last%}, {% endif%}
+					{% endfor %}
+					{% endifnotequal%}
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+-->
+	<div class="row books">
+		{% for b in books%}
+		<div class="col-sm-6 col-md-6 centered">
+			<div class="col-sm-4 col-md-4 navid-book-shelf-book">
+					<a  href="/books/{{ b.id }}/">
+	                    <img alt="{{ b.title }}" class="hidden-sm"
+	                         src="{{ b.image.url }}">
+	                    <img alt="{{ b.title }}" class="visible-sm"
+	                         src="{{ b.image.url }}">
+	                </a>
+				<div class="title centered">
+                    <a href="/books/{{ b.id }}/">
+                        <strong>{{ b.title }}</strong>
+                    </a>
+                </div>
+                <div class="book_authors centered">
+                    نویسنده:
+                    {% for a in b.authors.all %}
+                    <a href="/authors/{{ a.id }}/">{{ a.full_name }}</a>
+                    {% if not forloop.last %}، {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="book_authors centered">  
+                   	{% ifnotequal b.translators.count 0%}
+                   	مترجم:
+                   	{% for t in b.translators.all%}
+                   	<a href="/authors/{{ t.id }}">{{t.full_name}}</a>
+                   	{% if not forloop.last%},{% endif%}
+                   	{% endfor %}
+                   	{% endifnotequal %}
+                </div>
+			</div>
+			<div class="col-sm-8 col-md-8 navid-book-shelf-book featured" data-featured="true">
+				<hr class="hidden-sm">
+				<div class="title" href="/books/{{b.id}}"> </div>
+                <div class="description is-hidden">
+                    <div class="dotdotdot full text-right" style="text-align: justify;">
+                        {{ b.description|linebreaks }}
+                    </div>
+                </div>
+			</div>
+		</div>
+		{% endfor%}
+		
+	</div>
+</div>
+

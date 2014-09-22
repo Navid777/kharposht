@@ -1,0 +1,346 @@
+<div class="container author-shelf">
+
+<h3 class="centered">پدیدآورنده‌گان</h3>
+
+<div class="container">
+<div class="row noted_authors visible-lg">
+	{% for n in noted%}
+	<div class="author col-sm-4 col-md-4">
+        <div class="row">
+            <div class="col-sm-2 col-md-2">
+                <a href="/authors/{{ n.id }}"
+                   name="&amp;lpos=us-noted-authors-homepage"><img class="noted_author_image"
+                   												   alt="{{n.full_name}}"
+                                                                   src="{{ n.little_image.url }}"
+                                                                   title="{{ n.full_name }}">
+                    <noscript><img alt="{{ n.full_name}}"
+                                   src="{{ n.image.url }}"
+                                   title="{{ n.full_name }}"></noscript>
+                </a>
+            </div>
+            <div class="col-sm-10 col-md-10">
+                <h2><a href="/authors/{{ n.id }}"
+                       name="&amp;lpos=us-noted-authors-homepage">{{ n.full_name }}</a></h2>
+            </div>
+        </div>
+    </div>
+	
+	{% endfor %}
+<!--
+    <div class="author col-sm-4 col-md-4">
+        <div class="row">
+            <div class="col-sm-2 col-md-2">
+                <a href="http://authors.simonandschuster.com:80/Stephen-King/1666839"
+                   name="&amp;lpos=us-noted-authors-homepage"><img alt="Stephen King"
+                                                                   src="//d28hgpri8am2if.cloudfront.net/author_images/9366_1666839_th.jpg"
+                                                                   title="Stephen King">
+                    <noscript><img alt="Stephen King"
+                                   src="//d28hgpri8am2if.cloudfront.net/author_images/9366_1666839_th.jpg"
+                                   title="Stephen King"></noscript>
+                </a>
+            </div>
+            <div class="col-sm-10 col-md-10">
+                <h2><a href="http://authors.simonandschuster.com:80/Stephen-King/1666839"
+                       name="&amp;lpos=us-noted-authors-homepage">حمید درخشنده</a></h2>
+            </div>
+        </div>
+    </div>
+    <div class="author col-sm-4 col-md-4">
+        <div class="row">
+            <div class="col-sm-2 col-md-2">
+                <a href="http://authors.simonandschuster.com:80/Cassandra-Clare/35026200"
+                   name="&amp;lpos=us-noted-authors-homepage"><img alt="Cassandra Clare"
+                                                                   src="//d28hgpri8am2if.cloudfront.net/author_images/7099_35026200_th.jpg"
+                                                                   title="Cassandra Clare">
+                    <noscript><img alt="Cassandra Clare"
+                                   src="//d28hgpri8am2if.cloudfront.net/author_images/7099_35026200_th.jpg"
+                                   title="Cassandra Clare"></noscript>
+                </a>
+            </div>
+            <div class="col-sm-10 col-md-10">
+                <h2><a href="http://authors.simonandschuster.com:80/Cassandra-Clare/35026200"
+                       name="&amp;lpos=us-noted-authors-homepage">آلیس مانرو</a></h2>
+            </div>
+        </div>
+    </div>
+    <div class="author col-sm-4 col-md-4">
+        <div class="row">
+            <div class="col-sm-2 col-md-2">
+                <a href="http://authors.simonandschuster.com:80/Doris-Kearns-Goodwin/1233416"
+                   name="&amp;lpos=us-noted-authors-homepage"><img alt="Doris Kearns Goodwin"
+                                                                   src="//d28hgpri8am2if.cloudfront.net/author_images/11131_1233416_th.jpg"
+                                                                   title="Doris Kearns Goodwin">
+                    <noscript><img alt="Doris Kearns Goodwin"
+                                   src="//d28hgpri8am2if.cloudfront.net/author_images/11131_1233416_th.jpg"
+                                   title="Doris Kearns Goodwin"></noscript>
+                </a>
+            </div>
+            <div class="col-sm-10 col-md-10">
+                <h2><a href="http://authors.simonandschuster.com:80/Doris-Kearns-Goodwin/1233416"
+                       name="&amp;lpos=us-noted-authors-homepage">ونداد جلیلی</a></h2>
+            </div>
+        </div>
+    </div>
+    <div class="author col-sm-4 col-md-4">
+        <div class="row">
+            <div class="col-sm-2 col-md-2">
+                <a href="http://authors.simonandschuster.com:80/Karen-Kingsbury/82982459"
+                   name="&amp;lpos=us-noted-authors-homepage"><img alt="Karen Kingsbury"
+                                                                   src="//d28hgpri8am2if.cloudfront.net/author_images/10166_82982459_th.jpg"
+                                                                   title="Karen Kingsbury">
+                    <noscript><img alt="Karen Kingsbury"
+                                   src="//d28hgpri8am2if.cloudfront.net/author_images/10166_82982459_th.jpg"
+                                   title="Karen Kingsbury"></noscript>
+                </a>
+            </div>
+            <div class="col-sm-10 col-md-10">
+                <h2><a href="http://authors.simonandschuster.com:80/Karen-Kingsbury/82982459"
+                       name="&amp;lpos=us-noted-authors-homepage">کیوان سلطانی</a></h2>
+            </div>
+        </div>
+    </div>
+    <div class="author col-sm-4 col-md-4">
+        <div class="row">
+            <div class="col-sm-2 col-md-2">
+                <a href="http://authors.simonandschuster.com:80/Ernest-Hemingway/1792713"
+                   name="&amp;lpos=us-noted-authors-homepage"><img alt="Ernest Hemingway"
+                                                                   src="//d28hgpri8am2if.cloudfront.net/author_images/273_1792713_th.jpg"
+                                                                   title="Ernest Hemingway">
+                    <noscript><img alt="Ernest Hemingway"
+                                   src="//d28hgpri8am2if.cloudfront.net/author_images/273_1792713_th.jpg"
+                                   title="Ernest Hemingway"></noscript>
+                </a>
+            </div>
+            <div class="col-sm-10 col-md-10">
+                <h2><a href="http://authors.simonandschuster.com:80/Ernest-Hemingway/1792713"
+                       name="&amp;lpos=us-noted-authors-homepage">حسین رحمتی</a></h2>
+            </div>
+        </div>
+    </div>
+    <div class="author col-sm-4 col-md-4">
+        <div class="row">
+            <div class="col-sm-2 col-md-2">
+                <a href="http://authors.simonandschuster.com:80/Jude-Deveraux/1445134"
+                   name="&amp;lpos=us-noted-authors-homepage"><img alt="Jude Deveraux"
+                                                                   src="//d28hgpri8am2if.cloudfront.net/author_images/4291_1445134_th.jpg"
+                                                                   title="Jude Deveraux">
+                    <noscript><img alt="Jude Deveraux"
+                                   src="//d28hgpri8am2if.cloudfront.net/author_images/4291_1445134_th.jpg"
+                                   title="Jude Deveraux"></noscript>
+                </a>
+            </div>
+            <div class="col-sm-10 col-md-10">
+                <h2><a href="http://authors.simonandschuster.com:80/Jude-Deveraux/1445134"
+                       name="&amp;lpos=us-noted-authors-homepage">روبرت والزر</a></h2>
+            </div>
+        </div>
+    </div>
+-->
+</div>
+
+<div class="row noted_authors hidden-lg">
+	{% for n in noted%}
+	<div class="author col-sm-6 col-md-6">
+    <div class="row">
+        <div class="additional-spacing col-sm-2 col-md-2">
+            <a href="/authors/{{ n.id }}"
+               name="&amp;lpos=us-noted-authors-homepage"><img class="noted_author_image" 
+               												   alt="{{ n.full_name }}"
+                                                               src="{{ n.image.url }}"
+                                                               title="{{ n.full_name }}">
+                <noscript><img class="noted_author_image" 
+                	           alt="{{ n.full_name }}"
+                               src="{{ n.image.url }}"
+                               title="{{ n.full_name }}"></noscript>
+            </a>
+        </div>
+        <div class="col-sm-10 col-md-10">
+            <h2><a href="/authors/{{ n.id }}">{{ n.full_name }}</a></h2>
+        </div>
+    </div>
+	</div>
+	{% endfor %}
+<!--
+<div class="author col-sm-6 col-md-6">
+    <div class="row">
+        <div class="additional-spacing col-sm-2 col-md-2">
+            <a href="http://authors.simonandschuster.com:80/Stephen-King/1666839"
+               name="&amp;lpos=us-noted-authors-homepage"><img alt="Stephen King"
+                                                               src="//d28hgpri8am2if.cloudfront.net/author_images/9366_1666839_th.jpg"
+                                                               title="Stephen King">
+                <noscript><img alt="Stephen King"
+                               src="//d28hgpri8am2if.cloudfront.net/author_images/9366_1666839_th.jpg"
+                               title="حمید درخشنده"></noscript>
+            </a>
+        </div>
+        <div class="col-sm-10 col-md-10">
+            <h2><a href="#">حمید درخشنده</a></h2>
+        </div>
+    </div>
+</div>
+<div class="author col-sm-6 col-md-6">
+    <div class="row">
+        <div class="additional-spacing col-sm-2 col-md-2">
+            <a href="http://authors.simonandschuster.com:80/Cassandra-Clare/35026200"
+               name="&amp;lpos=us-noted-authors-homepage"><img alt="Cassandra Clare"
+                                                               src="//d28hgpri8am2if.cloudfront.net/author_images/7099_35026200_th.jpg"
+                                                               title="Cassandra Clare">
+                <noscript><img alt="Cassandra Clare"
+                               src="//d28hgpri8am2if.cloudfront.net/author_images/7099_35026200_th.jpg"
+                               title="Cassandra Clare"></noscript>
+            </a>
+        </div>
+        <div class="col-sm-10 col-md-10">
+            <h2><a href="http://authors.simonandschuster.com:80/Cassandra-Clare/35026200"
+                   name="&amp;lpos=us-noted-authors-homepage">ونداد جلیلی تل‌چگاه</a></h2>
+        </div>
+    </div>
+</div>
+<div class="author col-sm-6 col-md-6">
+    <div class="row">
+        <div class="additional-spacing col-sm-2 col-md-2">
+            <a href="http://authors.simonandschuster.com:80/Doris-Kearns-Goodwin/1233416"
+               name="&amp;lpos=us-noted-authors-homepage"><img alt="Doris Kearns Goodwin"
+                                                               src="//d28hgpri8am2if.cloudfront.net/author_images/11131_1233416_th.jpg"
+                                                               title="Doris Kearns Goodwin">
+                <noscript><img alt="Doris Kearns Goodwin"
+                               src="//d28hgpri8am2if.cloudfront.net/author_images/11131_1233416_th.jpg"
+                               title="Doris Kearns Goodwin"></noscript>
+            </a>
+        </div>
+        <div class="col-sm-10 col-md-10">
+            <h2><a href="http://authors.simonandschuster.com:80/Doris-Kearns-Goodwin/1233416"
+                   name="&amp;lpos=us-noted-authors-homepage">Doris Kearns Goodwin</a></h2>
+        </div>
+    </div>
+</div>
+<div class="author col-sm-6 col-md-6">
+    <div class="row">
+        <div class="additional-spacing col-sm-2 col-md-2">
+            <a href="http://authors.simonandschuster.com:80/Karen-Kingsbury/82982459"
+               name="&amp;lpos=us-noted-authors-homepage"><img alt="Karen Kingsbury"
+                                                               src="//d28hgpri8am2if.cloudfront.net/author_images/10166_82982459_th.jpg"
+                                                               title="Karen Kingsbury">
+                <noscript><img alt="Karen Kingsbury"
+                               src="//d28hgpri8am2if.cloudfront.net/author_images/10166_82982459_th.jpg"
+                               title="Karen Kingsbury"></noscript>
+            </a>
+        </div>
+        <div class="col-sm-10 col-md-10">
+            <h2><a href="http://authors.simonandschuster.com:80/Karen-Kingsbury/82982459"
+                   name="&amp;lpos=us-noted-authors-homepage">Karen Kingsbury</a></h2>
+        </div>
+    </div>
+</div>
+<div class="author col-sm-6 col-md-6">
+    <div class="row">
+        <div class="additional-spacing col-sm-2 col-md-2">
+            <a href="http://authors.simonandschuster.com:80/Ernest-Hemingway/1792713"
+               name="&amp;lpos=us-noted-authors-homepage"><img alt="Ernest Hemingway"
+                                                               src="//d28hgpri8am2if.cloudfront.net/author_images/273_1792713_th.jpg"
+                                                               title="Ernest Hemingway">
+                <noscript><img alt="Ernest Hemingway"
+                               src="//d28hgpri8am2if.cloudfront.net/author_images/273_1792713_th.jpg"
+                               title="Ernest Hemingway"></noscript>
+            </a>
+        </div>
+        <div class="col-sm-10 col-md-10">
+            <h2><a href="http://authors.simonandschuster.com:80/Ernest-Hemingway/1792713"
+                   name="&amp;lpos=us-noted-authors-homepage">ونداد جلیلی</a></h2>
+        </div>
+    </div>
+</div>
+<div class="author col-sm-6 col-md-6">
+    <div class="row">
+        <div class="additional-spacing col-sm-2 col-md-2">
+            <a href="http://authors.simonandschuster.com:80/Jude-Deveraux/1445134"
+               name="&amp;lpos=us-noted-authors-homepage"><img alt="Jude Deveraux"
+                                                               src="//d28hgpri8am2if.cloudfront.net/author_images/4291_1445134_th.jpg"
+                                                               title="Jude Deveraux">
+                <noscript><img alt="Jude Deveraux"
+                               src="//d28hgpri8am2if.cloudfront.net/author_images/4291_1445134_th.jpg"
+                               title="Jude Deveraux"></noscript>
+            </a>
+        </div>
+        <div class="col-sm-10 col-md-10">
+            <h2><a href="http://authors.simonandschuster.com:80/Jude-Deveraux/1445134"
+                   name="&amp;lpos=us-noted-authors-homepage">Jude Deveraux</a></h2>
+        </div>
+    </div>
+</div>
+-->
+</div>
+
+<div class="row pagination centered find_an_author" id="find_an_author"><h4 class="text-right visible-sm"
+                                                                            style="margin-top:20px;"></h4>
+    <ul>
+        <li class="disabled title hidden-sm"></li>
+        <li class=""><a href="/author_list/ا"
+                        name="&amp;lpos=us-noted-authors-homepage">الف</a></li>
+        <li class="disabled"><a href="/author_list/ب"
+                        name="&amp;lpos=us-noted-authors-homepage">ب</a></li>
+        <li class="disabled" ><a  href="/author_list/پ"
+                        name="&amp;lpos=us-noted-authors-homepage">پ</a></li>
+        <li class="disabled"><a  href="/author_list/ت"
+                        name="&amp;lpos=us-noted-authors-homepage">ت</a></li>
+        <li class="disabled"><a  href="/author_list/ث"
+                        name="&amp;lpos=us-noted-authors-homepage">ث</a></li>
+        <li><a  href="/author_list/ج"
+                        name="&amp;lpos=us-noted-authors-homepage">ج</a></li>
+        <li class="disabled"><a href="/author_list/چ"
+                        name="&amp;lpos=us-noted-authors-homepage">چ</a></li>
+        <li><a  href="/author_list/ح"
+                        name="&amp;lpos=us-noted-authors-homepage">ح</a></li>
+        <li class="disabled"><a  href="/author_list/خ"
+                        name="&amp;lpos=us-noted-authors-homepage">خ</a></li>
+        <li class=""><a href="/author_list/د"
+                        name="&amp;lpos=us-noted-authors-homepage">د</a></li>
+        <li class="disabled"><a  href="/author_list/ذ"
+                        name="&amp;lpos=us-noted-authors-homepage">ذ</a></li>
+        <li class=""><a href="/author_list/ر"
+                        name="&amp;lpos=us-noted-authors-homepage">ر</a></li>
+        <li class="disabled"><a  href="/author_list/ز"
+                        name="&amp;lpos=us-noted-authors-homepage">ز</a></li>
+        <li class="disabled"><a  href="/author_list/ژ"
+                        name="&amp;lpos=us-noted-authors-homepage">ژ</a></li>
+        <li><a  href="/author_list/س"
+                        name="&amp;lpos=us-noted-authors-homepage">س</a></li>
+        <li class="disabled"><a  href="/author_list/ش"
+                        name="&amp;lpos=us-noted-authors-homepage">ش</a></li>
+        <li class="disabled"><a  href="/author_list/ص"
+                        name="&amp;lpos=us-noted-authors-homepage">ص</a></li>
+        <li class="disabled"><a  href="/author_list/ض"
+                        name="&amp;lpos=us-noted-authors-homepage">ض</a></li>
+        <li class="disabled"><a  href="/author_list/ط"
+                        name="&amp;lpos=us-noted-authors-homepage">ط</a></li>
+        <li class="disabled"><a  href="/author_list/ظ"
+                        name="&amp;lpos=us-noted-authors-homepage">ظ</a></li>
+        <li class="disabled"><a  href="/author_list/ع"
+                        name="&amp;lpos=us-noted-authors-homepage">ع</a></li>
+        <li class="disabled"><a  href="/author_list/غ"
+                        name="&amp;lpos=us-noted-authors-homepage">غ</a></li>
+        <li class="disabled"><a  href="/author_list/ف"
+                        name="&amp;lpos=us-noted-authors-homepage">ف</a></li>
+        <li class="disabled"><a  href="/author_list/ق"
+                        name="&amp;lpos=us-noted-authors-homepage">ق</a></li>
+        <li class=""><a href="/author_list/ک"
+                        name="&amp;lpos=us-noted-authors-homepage">ک</a></li>
+        <li class="disabled"><a href="/author_list/گ"
+                        name="&amp;lpos=us-noted-authors-homepage">گ</a></li>
+        <li class="disabled"><a  href="/author_list/ل"
+                        name="&amp;lpos=us-noted-authors-homepage">ل</a></li>
+        <li class=""><a href="/author_list/م"
+                        name="&amp;lpos=us-noted-authors-homepage">م</a></li>
+        <li class="disabled"><a  href="/author_list/ن"
+                        name="&amp;lpos=us-noted-authors-homepage">ن</a></li>
+        <li><a href="/author_list/و"
+                        name="&amp;lpos=us-noted-authors-homepage">و</a></li>
+        <li><a  href="/author_list/ه"
+                        name="&amp;lpos=us-noted-authors-homepage">ه</a></li>
+        <li class="disabled"><a href="/author_list/ی"
+                        name="&amp;lpos=us-noted-authors-homepage">ی</a></li>
+    </ul>
+</div>
+</div>
+
+</div>
