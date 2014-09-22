@@ -17,7 +17,7 @@
     <link href="{{ MEDIA_URL }}css/styles.css" rel="stylesheet" type="text/css">
     {% block extrastyles %}{% endblock %}
 </head>
-
+{% autoescape off %}
 <body style="background-color: #E0EFD3">
 <header>
     <div class="container">
@@ -420,4 +420,5 @@
 
 
 </body>
+{% endautoescape %}
 </html>
