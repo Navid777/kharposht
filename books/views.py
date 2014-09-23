@@ -106,7 +106,7 @@ def contact_us(request):
 
 def books_by_subject(request, id):
     books = Book.objects.filter(subjects=id)
-    title = Subject.objects.get(id=id).name
+    title = Subject.objects.filter(id=id).name
     return render(request, 'book_list.html', {'books':books, 'title':title})
 
 def not_published_books(request):
