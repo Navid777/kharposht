@@ -1,20 +1,4 @@
 @font-face{
-	font-family: "BYekan";
-	src: url("../fonts/BYekan.ttf")
-}
-@font-face{
-	font-family: "Droid Arabic";
-	src: url("../fonts/DroidNaskh-Regular.ttf");
-}
-@font-face{
-	font-family: "BCompset";
-	src: url("../fonts/BCOMPSET.TTF");
-}
-@font-face{
-	font-family: "BCompsetB";
-	src: url("../fonts/BCOMPSETB.TTF");
-}
-@font-face{
 	font-family: "BMitra";
 	src: url("../fonts/BMITRABD.TTF");
 }
