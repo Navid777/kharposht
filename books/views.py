@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-s
-from books.models import Book, Author
-from django.shortcuts import render, get_object_or_404
+from books.models import Book, Author, Subject
 from django.db.models import Q
+from django.shortcuts import render, get_object_or_404
 
 def home(request):
     home_books = Book.objects.filter(on_homepage=True)
