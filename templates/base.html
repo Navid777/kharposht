@@ -12,7 +12,7 @@
     <meta name="format-detection" content="telephone=no">
     <title>نشر خارپشت</title>
     {% block facebook_meta%}{%endblock%}
-    <link rel="SHORTCUT ICON" href="/favicon_us.ico">
+    <link rel="SHORTCUT ICON" href="/media/images/favicon_us.ico">
     <link href="{{ MEDIA_URL }}css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="{{ MEDIA_URL }}css/bootstrap-rtl.min.css" rel="stylesheet" type="text/css">
     <link href="{{ MEDIA_URL }}css/styles.css" rel="stylesheet" type="text/css">
@@ -46,15 +46,15 @@
     <div id="navbar-main" class="navbar navbar-default">
         <div class="container">
             <div class="clearfix">
-            <button type="button" class="navbar-toggle" data-toggle="collapse"
+            <!--<button type="button" class="navbar-toggle" data-toggle="collapse"
                     data-target=".nav-collapse">
                 <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-            </button>
+            </button> -->
             <div class="pull-left navbar-form">
                 <div>
                     <input id="search-query" name="query" placeholder="جست‌وجو"
                            class="form-control" type="search">
-                    <input class="form-control" value="" onclick="search()" style="background:url(/media/images/magnifier12.png) no-repeat; background-size: 100%; padding-left:20px; border:0" type="submit">
+                    <input class="form-control pull-left" value="" onclick="search()" style=" width:inherit; background:url(/media/images/magnifier12.png) no-repeat; background-size: 100%; padding-left:20px; border:0" type="submit">
                 </div>
             </div>
             <a href="/">
@@ -130,8 +130,8 @@
                 
                 <li class="disabled"><a href="/about_us" id="video_nav_link" target="_top">درباره‌ی ِما</a></li>
                 <li><a href="/contact_us/" id="book_clubs_nav_link" target="_top">ارتباط با ما</a></li>
-                <li class="hidden-lg"><a href="#" target="_top">نامه‌خبر</a>
-                </li>
+                <!--<li class="hidden-lg"><a href="#" target="_top">نامه‌خبر</a>
+                </li> -->
             </ul>
             </div>
             </div>
