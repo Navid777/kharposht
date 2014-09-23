@@ -1,12 +1,11 @@
 {% extends 'base.html' %}
 
 {% block facebook_meta%}
-<meta property="og:title" content="نشر خارپشت">
+<meta property="og:title" content="{{author.full_name}}">
 <meta property="og:locale" content="fa_IR">
-<meta property="og:url" content="http://kharposht.ir/authors/{{author.id}}">
 <meta property="og:site_name" content="خارپشت">
-<meta property="og:description" content="صفحه‌ی {{autho.full_name}}در نشر خارپشت">
-<meta property="og:image" content="http://kharposht.ir/{{author.image.url}}">
+<meta property="og:description" content="{{author.description}}">
+<meta property="og:image" content="http://www.kharposht.ir/{{author.image.url}}">
 
 {% endblock %}
 
