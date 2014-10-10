@@ -1,0 +1,1712 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE TABLE auth_group (
+    id integer NOT NULL,
+    name character varying(80) NOT NULL
+);
+
+
+ALTER TABLE public.auth_group OWNER TO kharposht_db_user;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: kharposht_db_user
+--
+
+CREATE SEQUENCE auth_group_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_id_seq OWNER TO kharposht_db_user;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER SEQUENCE auth_group_id_seq OWNED BY auth_group.id;
+
+
+--
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE TABLE auth_group_permissions (
+    id integer NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_group_permissions OWNER TO kharposht_db_user;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: kharposht_db_user
+--
+
+CREATE SEQUENCE auth_group_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_permissions_id_seq OWNER TO kharposht_db_user;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER SEQUENCE auth_group_permissions_id_seq OWNED BY auth_group_permissions.id;
+
+
+--
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE TABLE auth_permission (
+    id integer NOT NULL,
+    name character varying(50) NOT NULL,
+    content_type_id integer NOT NULL,
+    codename character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.auth_permission OWNER TO kharposht_db_user;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: kharposht_db_user
+--
+
+CREATE SEQUENCE auth_permission_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_permission_id_seq OWNER TO kharposht_db_user;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER SEQUENCE auth_permission_id_seq OWNED BY auth_permission.id;
+
+
+--
+-- Name: auth_user; Type: TABLE; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE TABLE auth_user (
+    id integer NOT NULL,
+    password character varying(128) NOT NULL,
+    last_login timestamp with time zone NOT NULL,
+    is_superuser boolean NOT NULL,
+    username character varying(30) NOT NULL,
+    first_name character varying(30) NOT NULL,
+    last_name character varying(30) NOT NULL,
+    email character varying(75) NOT NULL,
+    is_staff boolean NOT NULL,
+    is_active boolean NOT NULL,
+    date_joined timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.auth_user OWNER TO kharposht_db_user;
+
+--
+-- Name: auth_user_groups; Type: TABLE; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE TABLE auth_user_groups (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_groups OWNER TO kharposht_db_user;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: kharposht_db_user
+--
+
+CREATE SEQUENCE auth_user_groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_groups_id_seq OWNER TO kharposht_db_user;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER SEQUENCE auth_user_groups_id_seq OWNED BY auth_user_groups.id;
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE; Schema: public; Owner: kharposht_db_user
+--
+
+CREATE SEQUENCE auth_user_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_id_seq OWNER TO kharposht_db_user;
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER SEQUENCE auth_user_id_seq OWNED BY auth_user.id;
+
+
+--
+-- Name: auth_user_user_permissions; Type: TABLE; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE TABLE auth_user_user_permissions (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_user_permissions OWNER TO kharposht_db_user;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: kharposht_db_user
+--
+
+CREATE SEQUENCE auth_user_user_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_user_permissions_id_seq OWNER TO kharposht_db_user;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER SEQUENCE auth_user_user_permissions_id_seq OWNED BY auth_user_user_permissions.id;
+
+
+--
+-- Name: books_author; Type: TABLE; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE TABLE books_author (
+    id integer NOT NULL,
+    first_name character varying(30) NOT NULL,
+    last_name character varying(50) NOT NULL,
+    image character varying(100) NOT NULL,
+    little_image character varying(100) NOT NULL,
+    description text NOT NULL,
+    on_homepage boolean NOT NULL
+);
+
+
+ALTER TABLE public.books_author OWNER TO kharposht_db_user;
+
+--
+-- Name: books_author_id_seq; Type: SEQUENCE; Schema: public; Owner: kharposht_db_user
+--
+
+CREATE SEQUENCE books_author_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.books_author_id_seq OWNER TO kharposht_db_user;
+
+--
+-- Name: books_author_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER SEQUENCE books_author_id_seq OWNED BY books_author.id;
+
+
+--
+-- Name: books_book; Type: TABLE; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE TABLE books_book (
+    id integer NOT NULL,
+    title character varying(100) NOT NULL,
+    image character varying(100) NOT NULL,
+    description text NOT NULL,
+    pages smallint NOT NULL,
+    "ISBN" character varying(20) NOT NULL,
+    price integer NOT NULL,
+    published boolean NOT NULL,
+    cut character varying(30) NOT NULL,
+    cover_designer_id integer,
+    on_homepage boolean NOT NULL,
+    featured_homepage boolean NOT NULL,
+    CONSTRAINT books_book_pages_check CHECK ((pages >= 0))
+);
+
+
+ALTER TABLE public.books_book OWNER TO kharposht_db_user;
+
+--
+-- Name: books_book_authors; Type: TABLE; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE TABLE books_book_authors (
+    id integer NOT NULL,
+    book_id integer NOT NULL,
+    author_id integer NOT NULL
+);
+
+
+ALTER TABLE public.books_book_authors OWNER TO kharposht_db_user;
+
+--
+-- Name: books_book_authors_id_seq; Type: SEQUENCE; Schema: public; Owner: kharposht_db_user
+--
+
+CREATE SEQUENCE books_book_authors_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.books_book_authors_id_seq OWNER TO kharposht_db_user;
+
+--
+-- Name: books_book_authors_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER SEQUENCE books_book_authors_id_seq OWNED BY books_book_authors.id;
+
+
+--
+-- Name: books_book_editors; Type: TABLE; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE TABLE books_book_editors (
+    id integer NOT NULL,
+    book_id integer NOT NULL,
+    author_id integer NOT NULL
+);
+
+
+ALTER TABLE public.books_book_editors OWNER TO kharposht_db_user;
+
+--
+-- Name: books_book_editors_id_seq; Type: SEQUENCE; Schema: public; Owner: kharposht_db_user
+--
+
+CREATE SEQUENCE books_book_editors_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.books_book_editors_id_seq OWNER TO kharposht_db_user;
+
+--
+-- Name: books_book_editors_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER SEQUENCE books_book_editors_id_seq OWNED BY books_book_editors.id;
+
+
+--
+-- Name: books_book_id_seq; Type: SEQUENCE; Schema: public; Owner: kharposht_db_user
+--
+
+CREATE SEQUENCE books_book_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.books_book_id_seq OWNER TO kharposht_db_user;
+
+--
+-- Name: books_book_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER SEQUENCE books_book_id_seq OWNED BY books_book.id;
+
+
+--
+-- Name: books_book_subjects; Type: TABLE; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE TABLE books_book_subjects (
+    id integer NOT NULL,
+    book_id integer NOT NULL,
+    subject_id integer NOT NULL
+);
+
+
+ALTER TABLE public.books_book_subjects OWNER TO kharposht_db_user;
+
+--
+-- Name: books_book_subjects_id_seq; Type: SEQUENCE; Schema: public; Owner: kharposht_db_user
+--
+
+CREATE SEQUENCE books_book_subjects_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.books_book_subjects_id_seq OWNER TO kharposht_db_user;
+
+--
+-- Name: books_book_subjects_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER SEQUENCE books_book_subjects_id_seq OWNED BY books_book_subjects.id;
+
+
+--
+-- Name: books_book_translators; Type: TABLE; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE TABLE books_book_translators (
+    id integer NOT NULL,
+    book_id integer NOT NULL,
+    author_id integer NOT NULL
+);
+
+
+ALTER TABLE public.books_book_translators OWNER TO kharposht_db_user;
+
+--
+-- Name: books_book_translators_id_seq; Type: SEQUENCE; Schema: public; Owner: kharposht_db_user
+--
+
+CREATE SEQUENCE books_book_translators_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.books_book_translators_id_seq OWNER TO kharposht_db_user;
+
+--
+-- Name: books_book_translators_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER SEQUENCE books_book_translators_id_seq OWNED BY books_book_translators.id;
+
+
+--
+-- Name: books_edition; Type: TABLE; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE TABLE books_edition (
+    id integer NOT NULL,
+    number integer NOT NULL,
+    date date NOT NULL,
+    circulation integer NOT NULL,
+    book_id integer NOT NULL
+);
+
+
+ALTER TABLE public.books_edition OWNER TO kharposht_db_user;
+
+--
+-- Name: books_edition_id_seq; Type: SEQUENCE; Schema: public; Owner: kharposht_db_user
+--
+
+CREATE SEQUENCE books_edition_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.books_edition_id_seq OWNER TO kharposht_db_user;
+
+--
+-- Name: books_edition_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER SEQUENCE books_edition_id_seq OWNED BY books_edition.id;
+
+
+--
+-- Name: books_subject; Type: TABLE; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE TABLE books_subject (
+    id integer NOT NULL,
+    name character varying(100) NOT NULL,
+    description character varying(200) NOT NULL
+);
+
+
+ALTER TABLE public.books_subject OWNER TO kharposht_db_user;
+
+--
+-- Name: books_subject_id_seq; Type: SEQUENCE; Schema: public; Owner: kharposht_db_user
+--
+
+CREATE SEQUENCE books_subject_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.books_subject_id_seq OWNER TO kharposht_db_user;
+
+--
+-- Name: books_subject_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER SEQUENCE books_subject_id_seq OWNED BY books_subject.id;
+
+
+--
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE TABLE django_admin_log (
+    id integer NOT NULL,
+    action_time timestamp with time zone NOT NULL,
+    user_id integer NOT NULL,
+    content_type_id integer,
+    object_id text,
+    object_repr character varying(200) NOT NULL,
+    action_flag smallint NOT NULL,
+    change_message text NOT NULL,
+    CONSTRAINT django_admin_log_action_flag_check CHECK ((action_flag >= 0))
+);
+
+
+ALTER TABLE public.django_admin_log OWNER TO kharposht_db_user;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: kharposht_db_user
+--
+
+CREATE SEQUENCE django_admin_log_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_admin_log_id_seq OWNER TO kharposht_db_user;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER SEQUENCE django_admin_log_id_seq OWNED BY django_admin_log.id;
+
+
+--
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE TABLE django_content_type (
+    id integer NOT NULL,
+    name character varying(100) NOT NULL,
+    app_label character varying(100) NOT NULL,
+    model character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.django_content_type OWNER TO kharposht_db_user;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: kharposht_db_user
+--
+
+CREATE SEQUENCE django_content_type_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_content_type_id_seq OWNER TO kharposht_db_user;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER SEQUENCE django_content_type_id_seq OWNED BY django_content_type.id;
+
+
+--
+-- Name: django_session; Type: TABLE; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE TABLE django_session (
+    session_key character varying(40) NOT NULL,
+    session_data text NOT NULL,
+    expire_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_session OWNER TO kharposht_db_user;
+
+--
+-- Name: django_site; Type: TABLE; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE TABLE django_site (
+    id integer NOT NULL,
+    domain character varying(100) NOT NULL,
+    name character varying(50) NOT NULL
+);
+
+
+ALTER TABLE public.django_site OWNER TO kharposht_db_user;
+
+--
+-- Name: django_site_id_seq; Type: SEQUENCE; Schema: public; Owner: kharposht_db_user
+--
+
+CREATE SEQUENCE django_site_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_site_id_seq OWNER TO kharposht_db_user;
+
+--
+-- Name: django_site_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER SEQUENCE django_site_id_seq OWNED BY django_site.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY auth_group ALTER COLUMN id SET DEFAULT nextval('auth_group_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('auth_group_permissions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY auth_permission ALTER COLUMN id SET DEFAULT nextval('auth_permission_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY auth_user ALTER COLUMN id SET DEFAULT nextval('auth_user_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY auth_user_groups ALTER COLUMN id SET DEFAULT nextval('auth_user_groups_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY auth_user_user_permissions ALTER COLUMN id SET DEFAULT nextval('auth_user_user_permissions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY books_author ALTER COLUMN id SET DEFAULT nextval('books_author_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY books_book ALTER COLUMN id SET DEFAULT nextval('books_book_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY books_book_authors ALTER COLUMN id SET DEFAULT nextval('books_book_authors_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY books_book_editors ALTER COLUMN id SET DEFAULT nextval('books_book_editors_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY books_book_subjects ALTER COLUMN id SET DEFAULT nextval('books_book_subjects_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY books_book_translators ALTER COLUMN id SET DEFAULT nextval('books_book_translators_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY books_edition ALTER COLUMN id SET DEFAULT nextval('books_edition_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY books_subject ALTER COLUMN id SET DEFAULT nextval('books_subject_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY django_admin_log ALTER COLUMN id SET DEFAULT nextval('django_admin_log_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY django_content_type ALTER COLUMN id SET DEFAULT nextval('django_content_type_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY django_site ALTER COLUMN id SET DEFAULT nextval('django_site_id_seq'::regclass);
+
+
+--
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: kharposht_db_user
+--
+
+COPY auth_group (id, name) FROM stdin;
+\.
+
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kharposht_db_user
+--
+
+SELECT pg_catalog.setval('auth_group_id_seq', 1, false);
+
+
+--
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: kharposht_db_user
+--
+
+COPY auth_group_permissions (id, group_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kharposht_db_user
+--
+
+SELECT pg_catalog.setval('auth_group_permissions_id_seq', 1, false);
+
+
+--
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: kharposht_db_user
+--
+
+COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
+1	Can add permission	1	add_permission
+2	Can change permission	1	change_permission
+3	Can delete permission	1	delete_permission
+4	Can add group	2	add_group
+5	Can change group	2	change_group
+6	Can delete group	2	delete_group
+7	Can add user	3	add_user
+8	Can change user	3	change_user
+9	Can delete user	3	delete_user
+10	Can add content type	4	add_contenttype
+11	Can change content type	4	change_contenttype
+12	Can delete content type	4	delete_contenttype
+13	Can add session	5	add_session
+14	Can change session	5	change_session
+15	Can delete session	5	delete_session
+16	Can add site	6	add_site
+17	Can change site	6	change_site
+18	Can delete site	6	delete_site
+19	Can add log entry	7	add_logentry
+20	Can change log entry	7	change_logentry
+21	Can delete log entry	7	delete_logentry
+22	Can add author	8	add_author
+23	Can change author	8	change_author
+24	Can delete author	8	delete_author
+25	Can add subject	9	add_subject
+26	Can change subject	9	change_subject
+27	Can delete subject	9	delete_subject
+28	Can add book	10	add_book
+29	Can change book	10	change_book
+30	Can delete book	10	delete_book
+31	Can add edition	11	add_edition
+32	Can change edition	11	change_edition
+33	Can delete edition	11	delete_edition
+\.
+
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kharposht_db_user
+--
+
+SELECT pg_catalog.setval('auth_permission_id_seq', 33, true);
+
+
+--
+-- Data for Name: auth_user; Type: TABLE DATA; Schema: public; Owner: kharposht_db_user
+--
+
+COPY auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
+1	pbkdf2_sha256$10000$P1ao4aNDb6td$pkksAjK2uAm4Z2PBvfcuiydP8DdGlQDXcF+8aozI6D8=	2014-09-25 06:46:28.841917-04	t	kharposht_admin			contact@kharposht.ir	t	t	2014-09-22 07:51:21.579632-04
+\.
+
+
+--
+-- Data for Name: auth_user_groups; Type: TABLE DATA; Schema: public; Owner: kharposht_db_user
+--
+
+COPY auth_user_groups (id, user_id, group_id) FROM stdin;
+\.
+
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kharposht_db_user
+--
+
+SELECT pg_catalog.setval('auth_user_groups_id_seq', 1, false);
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kharposht_db_user
+--
+
+SELECT pg_catalog.setval('auth_user_id_seq', 1, true);
+
+
+--
+-- Data for Name: auth_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: kharposht_db_user
+--
+
+COPY auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kharposht_db_user
+--
+
+SELECT pg_catalog.setval('auth_user_user_permissions_id_seq', 1, false);
+
+
+--
+-- Data for Name: books_author; Type: TABLE DATA; Schema: public; Owner: kharposht_db_user
+--
+
+COPY books_author (id, first_name, last_name, image, little_image, description, on_homepage) FROM stdin;
+5	حمید	درخشنده	images/Hamid-250.gif	images/Hamid-60_1.jpg	حمید درخشنده در سال ۱۳۲۹ در شهرستان بهبهان به دنیا آمد. دوران دبستان و دبیرستان را تا کلاس پنجم ریاضی در بهبهان گذراند و برای ادامه تحصیل به شیراز رفت. دیپلم ریاضی خود را از دبیرستان حاجی قوام شیراز گرفت و در سال ۱۳۴۸ تحصیلات خود را در رشته‌ی مهندسی صنایع در دانشگاه صنعتی شریف (که در آن زمان آریامهر نامیده می‌شد) آغاز کرد. در سال ۱۳۵۳ فارغ التحصیل شد. پس از فارغ‌التحصیلی مدت شش ماه به کار در کارخانه‌ی ذوب آهن اصفهان مشغول شد و سپس به‌علت مخالفت ساواک به ترک آن‌جا مجبور و وارد خدمت سربازی شد و با سمت افسر وظیفه در اداره‌ی مهندسی ارتش مشغول کار شد. در بهار سال ۱۳۵۴ رژیم شاه او را به‌دلیل مبارزات سیاسی دستگیر و پس از شکنجه و یک سال حبس انفرادی به حبس ابد به‌اضافه‌ی پانزده سال محکوم کرد. در بهمن ۱۳۵۷ از جمله آخرین زندانیان سیاسی بود که با انقلاب مردم از زندان شاه آزاد شد. در سال ۱۳۶۳ به اتحاد جماهیر شوروی سابق مهاجرت کرد. در سال ۱۳۶۵ از شوروی به افغانستان رفت و در آن دیار به کار فرهنگی در رابطه با مردم افغانستان مشغول شد. در سال ۱۳۶8 به آلمان غربی مهاجرت کرد و از آن زمان تاکنون در شهر برلین زندگی می‌کند.\r\nحمید درخشنده به واسطه‌ی سال‌ها زندگی در کشورهای آلمان و روسیه، با زبان روسی آشنایی کامل و به زبان آلمانی در حد بومی تسلط دارد و با توجه به آشنایی گسترده با آثار <a href="http://www.badeel.ir/authors/7/"> روبرت والزر</a>، نویسنده‌ی برجسته و بسیار تاثیرگذار که در ایران هنوز ناشناس مانده است، درصدد ترجمه‌ی آثار او برآمده است. نشر بدیل کتاب <a href="http://www.badeel.ir/books/4/"> یاکوب فون گونتن</a> را از این نویسنده به‌ترجمه‌ی حمید درخشنده منتشر کرده است. حمید درخشنده هم‌اکنون مشغول ترجمه‌ی رمان دیگری از روبرت والزر به‌نام دستیار برای نشر بدیل است.\r\nاز جمله دیگر ترجمه‌های چاپ‌شده‌ی حمید درخشنده می‌توان به <a href="http://www.kharposht.ir/books/2/"> من می‌میرم اما یادها می‌ماند</a>، نوشته‌ی <a href="http://www.kharposht.ir/authors/8/"> هنینگ مانکل</a> اشاره کرد که نشر خارپشت منتشر کرده است.	t
+1	روبرتو	بولانیو	images/Bolano-250.jpg	images/bolano-60.jpg	روبرتو بولانیو، ۲۰۰۳-۱۹۵۳، اهل کشور شیلی و مهم‌ترین نویسنده‌ی معاصر این کشور است. او شاعری جدی نیز بود و در نقد ادبی نیز دستی بلند داشت. روبرتو بولانیو سال 2003 در سن پنجاه‌سالگی براثر بیماری کبدی درگذشت. در همین‌سال با ترجمه‌ی کتاب <a href="http://www.kharposht.ir/books/1/"> شبانه‌ی شیلی</a> به انگلیسی به‌سرعت شهرتی جهانی یافت و سایر کتاب‌های او بی‌درنگ به زبان‌های مختلف ترجمه شد. او در سان‌تیاگو به‌دنیا آمد و در پانزده‌سالگی به‌همراه خانواده‌اش به مکزیک مهاجرت کرد و ضمن فعالیت‌های مطبوعاتی جذب فعالیت‌های سیاسی شد. سال 1973 به شیلی برگشت تا از دولت سال‌وادور آلنده حمایت کند. بعد از کودتای پینوشه به‌اتهام مظنون‌بودن به فعالیت تروریستی دستگیر شد اما با کمک دو هم‌کلاسی سابق که حالا نگه‌بان زندان شده بودند فرار کرد. این تجربه بعدها در برخی آثار او نقش بست.\r\nاز جمله آثار بسیار مهم او می‌توان به <a href="http://www.kharposht.ir/books/1/"> شبانه‌ی شیلی</a>، <a href="http://vandadjalili.com/article/12/"> ۲۶۶۶</a> و «کارآگاهان وحشی» اشاره کرد.\r\nنثر بولانیو بسیار غنی و پرداخت‌شده است و ترجمه‌ی آثار او کاری بسیار زمان‌گیر. بازی‌های زبانی او موجب می‌شود، اگر کتاب‌های او از زبانی غیر از زبان اصلی ترجمه شود، بازخوانی متن اصلی اسپانیایی ضروری باشد. بولانیو نویسنده‌یی بسیار تاثیرگذار است و خوانندگان فراوان دارد، اما به‌دلیل ترجمه‌های ضعیفی که از آثار او در ایران چاپ شده است در ایران آن‌طور که باید شناخته نشده است. نشر خارپشت با ترجمه‌ی <a href="http://www.kharposht.ir/books/1/"> شبانه‌ی شیلی</a> به‌شکل دقیق و مقابله‌شده با متن اصلی، خوانندگان را با با حال‌وهوای درست آثار بولانیو آشنا می‌کند.\r\n	t
+4	ونداد	جلیلی	images/250-vandad.gif	images/60-dar-60-vandad.gif	ونداد جلیلی، متولد 1361، سابقه‌ی کار مطبوعاتی، تالیف و ترجمه در زمینه‌های ادبیات، سینما، موسیقی، معماری و عکاسی دارد. از جمله سوابق مطبوعاتی او می‌توان به هم‌کاری با صفحه‌ی موسیقی و سینمای روزنامه‌ی همشهری، عضویت در هیات تحریریه‌ی مجله‌ی مقام موسیقایی و عضویت در هیات تحریریه‌ی مجله‌ی گذر اشاره کرد.\r\nاز جمله آثار تالیفی چاپ‌شده‌ی او می‌توان به <a href="http://www.badeel.ir/books/3/"> سوءتفاهم‌نامه</a> (نشر بدیل، 1392) و <a href="http://www.kharposht.ir/books/3/"> نوروزدرمانی</a> (نشر خارپشت، 1392) اشاره کرد.\r\nاز جمله آثار ترجمه‌ی او می‌توان به <a href="http://www.badeel.ir/books/5/"> بهترین داستان‌های آلیس مانرو</a> (نشر بدیل، 1393)، <a href="http://www.kharposht.ir/books/1/"> شبانه‌ی شیلی</a> نوشته‌ی <a href="http://www.kharposht.ir/authors/1/"> روبرتو بولانیو</a> (نشر خارپشت، 1393) و <a href="http://vandadjalili.com/article/13/"> دشمن</a> نوشته‌ی جی ام کوتسی (نشر چشمه، 1393) اشاره کرد.\r\nاز جمله آثار او در زمینه‌ی عکاسی می‌توان به <a href="http://www.kharposht.ir/books/4/"> از کودکان‌تان عکس‌های گویا و جان‌دار بگیرید</a> نوشته‌ی <a href="http://www.kharposht.ir/authors/2/"> جی فورمن</a> (نشر خارپشت، 1393) اشاره کرد.\r\nاز جمله آثار او در زمینه‌ی معماری: «حس وحدت» (نشر علم معمار، چاپ چهارم، اردی‌بهشت 1393)، «نقاب مه‌دوسا» نوشته‌ی جان هیداک (نشر علم معمار، 1391) و «پنج معمار» نوشته‌ی جان هیداک، پیتر آیزنمن، ریچارد مایر، مایکل گریوز و چارلز گوئیتمی (نشر علم معمار، 1391).\r\nونداد جلیلی هم‌اکنون به‌صورت متمرکز در زمینه‌ی کارهای تالیفی خود و ترجمه‌ی آثار برجسته‌ی ادبیات مدرن آمریکای لاتین فعالیت می‌کند.\r\nبرای اطلاعات بیش‌تر به <a href="http://vandadjalili.com" target="_blank">وب‌سایت شخصی ونداد جلیلی</a> مراجعه کنید.	t
+2	جی	فورمن	images/Jay-Forman-250.jpg	images/Jay-Forman60.jpg	جی فورمن در عکاسی از کودکان تخصص دارد. کتاب او، <a href="http://www.kharposht.ir/books/4/"> از کودکان‌تان عکس‌های گویا و جان‌دار بگیرید</a> عکاسی را از کودکان بدون هیچ‌گونه امکانات و یا دوربین پیش‌رفته به خواننده‌یی که هیچ سابقه‌یی از عکاسی ندارد، آموزش می‌دهد. او لابراتواری دارد و در لابراتوار خود از کودکان عکاسی می‌کند. کتاب او با استقبال زیاد پدرومادرهای هم‌وطن‌اش که دوست دارند لحظه‌های شیرین کودکی فرزندان‌شان را ثبت کنند، روبه‌رو شده است.	f
+8	هنینگ	مانکل	images/Henning-Mankell-C-Lina-Ikse.jpg	images/mankell-60.jpg	هنینگ مانکل، متولد ۱۹۴۸، برجسته‌ترین نویسنده‌ی زنده‌ی سوئدی است. شهرت او بیش‌تر به‌واسطه‌ی آثار جنایی و داستان‌های کارآگاه «کورت والاندر» است. او عمدتاً ادبیات داستانی می‌نویسد اما در تمام آثار خود در قالب داستانی به موضوعات اجتماعی می‌پردازد. در اعتراضات سال ۱۹۶۸ علیه جنگ ویت‌نام، استعمار پرتغال و رژیم آپارتاید آفریقای جنوبی فعالانه شرکت کرد و هم‌اکنون از مدافعان سرسخت حقوق مردم فلسطین است و به این کشور سفر کرده است. پس از این سفر در مصاحبه‌یی گفته است: «اسرائیل تکرار نظام منفور آپارتاید است که زمانی سیاهان آفریقا را در کشور خودشان شهروند درجه‌ی دو محسوب می‌کرد.» او از کسانی بود که در سال ۲۰۱۰ برای شکستن تحریم اسرائیل با کشتی به غزه سفر کرد.\r\nمانکل مرتب به آفریقا می‌رود. گاه در آفریقا سکونت می‌کند و گاه در سوئد. مانکل همسر دختر کارگردان مشهور سینمای سوئد «اینگمار برگمان» است. در ابتدای سال ۲۰۱۴ در مصاحبه‌یی گفت به سرطان مبتلا شده است و چند ماه بعد در مصاحبه‌یی دیگر گفت سرطان‌اش درمان شده و حال‌اش رو به بهبودی است.\r\nمانکل جوایز ادبی بسیار برده است و آثار او به زبان‌های مختلف ترجمه شده است. نشر خارپشت کتاب <a href="http://www.kharposht.ir/books/2/"> من می‌میرم اما یادها می‌ماند</a> او را منتشر کرده است.\r\n	t
+\.
+
+
+--
+-- Name: books_author_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kharposht_db_user
+--
+
+SELECT pg_catalog.setval('books_author_id_seq', 8, true);
+
+
+--
+-- Data for Name: books_book; Type: TABLE DATA; Schema: public; Owner: kharposht_db_user
+--
+
+COPY books_book (id, title, image, description, pages, "ISBN", price, published, cut, cover_designer_id, on_homepage, featured_homepage) FROM stdin;
+3	نوروزدرمانی	images/noruz_jeld_final.jpg	نوروزدرمانی یک اثر داستانی فرمال است. نویسنده با ایجاد دو روایت موازی (با بیان یک‌درمیان)، یکی از روزهایی از سال‌های زندگی راوی و دومی از روزهایی که به سفری نوروزی رفته است، به ماجرای زندگی او می‌پردازد و تکه‌های روایت را آرام‌آرام به هم پیوند می‌دهد. این دو روایت موازی در انتهای داستان در فصل پایانی به هم می‌رسد و در ماجرای روزی پس از سفر نوروزی یکی می‌شود. نویسنده به‌خوبی از عهده‌ی توصیف فضاهای بومی محل رخ‌داد داستان و نیز فضاهای تهران برآمده است و این تم دوگانگی و تقابل را هم در شخصیت‌ها، هم در فضاها، هم در رخ‌دادها و هم در فصل‌ها استفاده کرده است تا به یک‌نواختی برسد.\r\nموضوع داستان کتاب جدایی است.\r\n\r\nبخشی از کتاب:\r\nدست‌ام دوباره تو جیب رفت و گوشی را بیرون کشید. می‌دانستم هروقت تصمیم می‌گیرم جلو ِ خودم را بگیرم و کاری نکنم فقط چندلحظه که بگذرد کار شده است. احتیاط را کنار گذاشتم. قیافه‌های خندان و آسوده نمی‌گذاشتند راحت باشم. گوشی را بالا آوردم و نوشتم «آدم تو شلوغی عصبی می‌شه آ!» و فرستادم به شماره‌ی رویا. جوابی نی‌آمد. حتا بعد ِ ده‌دقیقه‌ی تمام. دوباره نوشتم «این‌جا این‌قد شلوغه که نگو.» باز هم جوابی نی‌آمد. این‌بار شش‌دقیقه بیش‌تر نتوانستم منتظر بمانم. نوشتم «من یه‌کم حال‌ام گرفته‌س. لطفاً جواب بده. این‌جوری آروم می‌شم.» پنج‌دقیقه گذشت و جوابی نی‌آمد. می‌دانستم حالا رویا هم جایی نشسته و بی‌خیال می‌خندد. از خودم بدم آمد که جایی نشسته‌ام که همه بی‌خیال می‌خندند و من این‌طور به خودم می‌پیچم. چیزی که از هیچ کس ِ دیگری نمی‌پذیرفتم. نوشتم: «من می‌گم حال‌ام بده تو حتا یه جواب‌ام نمی‌دی؟» اما دیدم نمی‌توانم منتظر بنشینم بل‌که جواب دهد و پشت‌بندش شماره‌اش را گرفتم. دو بوق که خورد گفت: «الو؟» چیزی تو صداش فراری‌ام می‌داد. با صدایی مسلط و مثلاً بی‌خیال گفتم: «اس‌ام‌اس نمی‌آد؟» می‌دانستم پیامک‌هام را گرفته است، گوشی گزارش ِ دریافت داشت. با صدای مثلاً ازکوره‌دررفته‌یی جواب داد: «چرا! داشتم جواب می‌دادم. دودقه تحمل داشته باش!» دروغ می‌گفت. دودقیقه! بیست‌دقیقه گذشته بود. اصلاً دوسال گذشته بود. دوسال بود پیامک‌هام جوابی نمی‌گرفت مگر بعد ِ مراسم ِ زنگ‌زدن و با صدای مثلاً بی‌خیال «اس‌ام‌اس‌هام نمی‌آد؟» گفتن. سه‌سال بود بنای جدایی گذاشته بود و همیشه علت‌اش را از رفتارهای من مایه می‌گذاشت و من هرچی می‌گفت باور می‌کردم و از خودم خجالت می‌کشیدم تا وقتی که تیپا خوردم و دانستم حالا باید از خودم و بلاهت و کوری‌ام خجالت بکشم. سه‌سال بود یک‌ماه‌مانده‌به‌نوروز دوره‌اش که شروع می‌شد یک‌روز تا لنگ‌ظهر می‌خوابید، بعد بیدار می‌شد و در جواب ِ سلام ِ ابلهانه و لب‌خندآلود ِ من می‌گفت: «باید بات حرف بزنم.» و من می‌دانستم یعنی می‌خواهم جدا بشوم یا به قول ِ خودش «به‌هم بزنم» یا «تموم‌اش کنم». سه‌سال بود نوروز را به کام ِ من تلخ می‌کرد که خودش نوروزدرمانی کند. از آخرین‌بار کمی بیش‌تر از یک‌ماه می‌گذشت و آخرین‌بار اصلاً جور ِ دیگری بود. آخرین‌بار من ِ تیپاخورده هم چندماهی بود معلق بودم و نمی‌دانستم چه بکنم. منطق‌ام می‌گفت بی‌خود کش می‌دهم و باید فاتحه‌ی این زنده‌گی را بخوانم اما دل‌ام راه نمی‌داد. بی‌توجهی‌اش را و بی‌علاقه‌گی‌اش را خوب می‌دیدم. اصلاً پنهان نمی‌کرد. توجه‌اش را هم به جاهای دیگر می‌دیدم. خنده‌هاش را می‌دیدم تو عکس‌هایی که تو سفرهای مختلف با آدم‌های مختلف می‌گرفت. منطق به سرم می‌کوبید که «این طبیعی نیست. یک‌پای کار می‌لنگد.» اما بعد ِ دوسال‌ونیم تازه جای ضربه‌هاش کوفته شده بود و می‌فهمیدم. گیرم هنوز هم جگر نداشتم خودم پا پیش بگذارم و منتظر ِ مقدمات ِ نوروزی بودم. می‌دانستم یک‌روز دوره‌اش که شروع شد تا لنگ‌ظهر می‌خوابد، بعد بیدار می‌شود و عوض ِ جواب به سلام ِ ابلهانه و لب‌خندآلود من می‌گوید: «باید بات حرف بزنم.» می‌دانستم شرط و شروط ِ سخت و شدیدی که می‌گذارد تنها بهانه‌یی است بر پایه‌ی اطمینان‌اش از ناتوانی من در اجابت‌شان. یک‌بار دیده بودم با دخترعموش مریم چت می‌کرد و می‌نوشت: «راهام گفته شرط‌اتو ردیف می‌کنم. حالا نمی‌دونم اگه واقعاً این‌کارو کرد چی‌کار کنم، چه بهانه‌یی بی‌آرم؟» و مریم که مشاور ِ سوم‌اش در جدایی از من بود راه‌نمایی داده بود که به من فرصت بدهد که خودم متوجه بشوم باید بروم اما نه جوری که هوا برم دارد که رویا هنوز دوست‌ام دارد. مریم مشاور ِ سوم‌اش بود. دو مشاور ِ دیگر داشت و از هرسه‌تاشان تا جایی بی‌زار بودم که می‌توانستم از آدمی بی‌زار باشم. حیف که این‌مقدار تنفر به‌هیچ‌دردی نمی‌خورد و دوروزه هیچ می‌شد. مشاورانی که در حضور ِ من لب‌خند می‌زدند و دوستانه برخورد می‌کردند. چارپا فرض‌ام می‌کردند و فکر می‌کردند نمی‌دانم چه‌طور تیشه به ریشه‌ی زیرساخت ِ گه‌گرفته‌ی زنده‌گی ِ من می‌زنند. فکر می‌کردند نمی‌فهمم چه‌طور بی‌این‌که از تیپایی که من خورده‌ام باخبر باشند تمام ِ بهانه‌های رویا را مثل ِ دلیل روشن‌تر از روز می‌پذیرند و به‌او دل‌گرمی می‌دهند که خوب کاری می‌کند. سه‌تا مشاور ِ کارتون‌دوست، روزخواب و مورنگ‌کن که تنها کاری که ازشان برمی‌آمد خریدرفتن، نظردادن درباره‌ی لباس و قیافه و بچه‌گانه‌حرف‌زدن بود. مشاورانی که همه چندسال پای سفره‌ی من نشسته بودند و نان و نمک‌ام را خورده بودند. من مشاور نداشتم. از مشاور بی‌زار بودم. اگر کسی به من می‌گفت رویا بد است از او بدم می‌آمد. دل‌ام نمی‌خواست کسی بد ِ او را پیش من بگوید. بااین‌که می‌دانستم بد کرده دوست نداشتم از کس ِ دیگری بشنوم. حتا اگر گاهی فشار ِ سختی بالا می‌زد و خودم پیش ِ کسی از او گله‌یی می‌کردم به محض ِ گرفتن ِ تایید ِ شنونده از گه‌خوردن پشیمان می‌شدم و احساس می‌کردم آدم ِ بی‌معرفت و بی‌وجودی هستم.\r\nصدای گوشی را تو شلوغی و سروصدا نشنیدم اما لرزش ِ دست‌ام می‌گفت پیامک آمده است. نوشته بود: «عمداً جواب نمی‌دم که عادت کنی دیگه این‌چیزا رو به من نگی.» از خودخواهی و ساده‌گی‌اش خنده‌ام گرفت. فکر می‌کرد من دنبال ِ بهانه‌یی برای برگشتن هستم و تمام ِ حواس‌اش را جمع کرده بود مبادا این بهانه را دست ِ من بدهد. لابد مشاوره‌ی تازه گرفته بود.\r\nگفته بود: «باید بات حرف بزنم.» صندلی را عقب داده بودم و طرف‌اش چرخیده بودم. سکوت کرده بود. من هم سکوت کرده بودم اما تاقت‌ام تاق شده بود. انگار که بخواهم شاخ ِ غول بشکنم تمام ِ توان‌ام را جمع کرده بودم و گفته بودم: «خوب بگو. چرا هیچ‌چی نمی‌گی؟» صدام جوری بود که انگار شنیدن ِ چیز ِ دیگری را هم ممکن می‌دانم. گفت: «می‌دونی دیگه. می‌خوام تموم کنم.» حالا نوبت ِ من بود که چندثانیه مکث کنم و بعد زور بزنم و با صدایی که با تمام ِ تلاش‌ام سعی می‌کردم صاف و بی‌لرزش باشد جواب بدهم: «منطقیه.»\r\nدست دراز کردم، فلاسک ِ چای را از رو میز برداشتم و به نوید دادم که پی‌اش آمده بود. نگاه‌ام میان ِ جماعت چرخید که به جنب‌وجوش افتاده بودند و می‌خواستند بروند دوروبر ِ شهر گشتی بزنند. نیم‌چه‌بارانی آمده بود، گردوخاک نشسته بود و هوا تازه شده بود. بلند شدم. کلید ِ رانه را از رو عسلی ِ کوچک ِ کنج ِ پذیرایی برداشتم و بیرون رفتم. تا بقیه هم بی‌آیند رفتم مستراح ِ سرا و شاشیدم.\r\n\r\n	128	7-0-93719-600-978	60000	t	رقعی (۱۴/۵ در ۲۱/۵)	\N	t	f
+1	شبانه‌ی شیلی	images/jeld_shabane-shili_06M.jpg	شبانه‌ی شیلی، یکی از برجسته‌ترین آثار ادبی معاصر، نخستین کتاب بولانیو بود که، متاسفانه در سال مرگ او، به زبان انگلیسی ترجمه شد و او را به نویسنده‌یی مشهور در تمام دنیا تبدیل کرد. شبانه‌ی شیلی داستانی بسیار خواندنی و سنجیده با لحن شاعرانه و شاخه‌های فرعی فراوان است که به مساله‌ی ادبیات در دیکتاتوری و جهت‌گیری‌های اهالی ادبیات در شرایط دیکتاتوری می‌پردازد. شبانه‌ی شیلی فریاد اعتراض بولانیو به تمام نویسندگان دوره‌ی دیکتاتوری از جمله خودش است. نشر خارپشت ترجمه‌ی دقیق این کتاب را که با متن اصلی اسپانیایی مقابله شده است در اختیار خواننده قرار می‌دهد تا خواننده‌ی ایرانی هم مثل خوانندگان سراسر جهان بتوانند از ارزش این کتاب مهم بهره ببرند. تفاوت‌ها آشکار است.\r\nبخشی از کتاب شبانه‌ی شیلی:\r\nشبی فهمیدم نه‌رودا مرده است. به فرول زنگ زدم و گفتم پاب‌لو مرد. فرول گفت سرطان کشت‌اش، سرطان. گفتم بله سرطان. برویم مراسم ختم‌اش؟ فرول گفت من که می‌روم. گفتم من هم بات می‌آیم. گوشی را که گذاشتم انگار کل ِگفت‌وگو را خواب دیده بودم. روز ِبعد به گورستان رفتیم. فرول خیلی باسلیقه و شیک لباس پوشیده بود. مثل ِارواح شده بود اما شیک بود. تو گوش‌ام زمزمه کرد ملک‌ام را به‌ام پس می‌دهند. جمعیت ِانبوهی آمده بودند و راه‌رفتنا مردم به‌مان می‌پیوستند و بیش‌تر هم می‌شدیم. فرول گفت این بچه‌خوش‌گل‌ها را ببین! گفتم خودت را مهار کن. به چهره‌اش نگاه کردم. به چندغریبه چشمک می‌زد. جوان بودند و انگار حال ِخوشی نداشتند اما من احساس می‌کردم همه از خوابی بیرون افتاده‌اند که در آن حال ِخوش و حال ِبد چیزی غیر ِتصادف‌های متافیزیکی نبود. می‌شنیدم پشت‌سرم کسی فرول را شناخته است و می‌گفت این‌یارو منتقده فرول است. کلمه‌ها از خوابی بیرون می‌آمد و به خوابی دیگر وارد می‌شد. بعد کسی با هیجانی تب‌دار بنای فریادزدن گذاشت و دیگرانی تب‌دار و هیجان‌زده باش هم‌صدا شدند. فرول پرسید این اداواصول‌های زشت چی است؟ جواب دادم مشتی رند اند، نگران نباش با گورستان فاصله‌یی نداریم. فرول پرسید پاب‌لو چی شد؟ گفتم آن‌جلو است تو تابوت‌اش. فرول گفت خیلی ابله ای! هنوز آن‌قدرها هم که تو فکر می‌کنی مجنون نشده‌ام. گفتم به‌دل نگیر. جواب داد نمی‌گیرم. چه‌حیف که دیگر تشییع‌جنازه‌ها مثل ِقدیم نیست. گفتم واقعاً. فرول گفت مشایعت ِمرده آداب ِخاص خودش را می‌طلبد، منظورم یادکردن از مرده و باقی ِماجرا است. گفتم به‌سبک ِفرانسوی‌ها. فرول گفت اگر جاش بود نطق ِغرایی در بزرگ‌داشت ِپاب‌لو می‌نوشتم. بعد گریه‌اش گرفت. با خودم گفتم لابد خواب می‌بینیم. وقتی بازوبه‌بازو از گورستان بیرون می‌آمدیم مردی دیدم که به قبری تکیه داده بود و خوابیده بود. لرزه‌یی به جان‌ام افتاد.\r\n	134	4-1-93719-600-978	75000	t	رقعی (۱۴/۵ در ۲۱/۵)	\N	t	t
+4	از کودکان‌تان عکس‌های گویا و جان‌دار بگیرید	images/kids_jeld_08_4_2_s.jpg	روزی را که اولین دوربین عکاسی خوب‌ام را گرفتم هنوز یادم هست. اشتیاقی که به عکاسی پیدا کرده بودم در تمام علایق و فعالیت‌های پیش‌ازآن‌ام بی‌سابقه بود. در مسابقه‌ی فوتبال پسرم سه حلقه فیلم عکاسی مصرف کردم، از پسرک‌ام که خواب بود بیست عکس گرفتم و... خلاصه معلوم است چه‌قدر جذب عکاسی شده بودم. تنها چیزی که باعث شد عطش عکاسی‌ام را کمی مهار بزنم خالی‌شدن جیب‌ام بود. اتفاقاً این درنگ مفید بود چون با کمی بررسی دقیق‌تر متوجه شدم عکس‌های من ـ در بهترین حالت ـ تهی و بی‌معنا بود. بهترین خصوصیت‌شان این بود که در بسیاری‌شان می‌شد سوژه‌های عکاسی را شناخت.\r\nسعی می‌کردم مهارت‌های‌ام را بیش‌تر کنم اما همیشه عکس‌ها پر از اشکالات پیش‌پاافتاده بود: گوش‌های نصفه‌افتاده، چشم‌های خارج‌ازفوکوس و ترکیب‌تصویر بی‌مزه و تکراری. مدام از خودم می‌پرسیدم: «چه‌خصوصیتی عکس را جذاب می‌کند که تو عکس‌های من نیست؟ سر جادویی عکسی که ما را شیفته‌ی خود می‌کند چی است؟» اگر شما هم دنبال پاسخ به همین پرسش‌ها هستید و می‌خواهید از فرزندان‌تان عکس‌های بهتری بگیرید این‌کتاب به‌دردتان می‌خورد.\r\nوالدین بهترین فرصت‌ها را برای عکاسی از کودکان‌شان دارند چون در جشن‌تولد، عید نوروز، بازی‌های دسته‌جمعی، جشن‌های پایان مدرسه و هر رخ‌داد دیگری همراه کودکان‌شان هستند. عکس‌های پرسنلی و استودیویی گذشت سال‌ها و مدل موی بچه‌ها را به‌خوبی حفظ می‌کند اما معمولاً شخصیت واقعی کودکان را نشان نمی‌دهد. بعید می‌دانم فرزندان شما میل داشته باشند ساعت‌ها با لباس پلوخوری و موی مرتب و شانه‌خورده در استودیو بنشینند و یک عکاس حرفه‌یی دوربین‌به‌دست مدام ازشان عکس بگیرد. کودکان در این‌شرایط راحت نیستند و بنابراین درست جایی که می‌خواهید شخصیت واقعی‌شان دیده شود این‌اتفاق نمی‌افتد.\r\nما دوست داریم در عکس‌های بچه‌هامان روحیه و خصوصیات ظریف شخصیتی‌شان دیده شود. بی‌تردید خنده‌ی کودک سه‌ساله‌ی من شیطنت‌آمیزتر از خنده‌ی دوسال‌ونیمه‌گی او است.  چشمان پسرک هفت‌ماهه‌ی من تا همین یک‌ماه پیش کاملاً به من شبیه بود اما حالا با چشمان مادرش مو نمی‌زند. پدرومادر شاهد دوره‌های مختلف رشد فرزندان‌شان هستند و مایل اند هر لحظه را قبل این‌که دوره‌ی بعدی شروع شود و از دست برود ثبت کنند. البته فرزندان ما خیلی زود رشد می‌کنند اما می‌توانیم با عکس‌های آن‌ها لحظه‌ها را شکار کنیم و هروقت دوست داشته باشیم تماشا کنیم. رشد آن‌ها و سال‌خورده‌شدن ما این‌گونه قابل‌تحمل می‌شود.\r\nتنها با چندنکته‌ی پایه‌یی درباره‌ی درک عکاسی ـ و درک کودکان ـ می‌توانید مهارت عکاسی‌تان را آن‌قدر بهتر کنید که تقریباً همیشه عکس‌های خوب بگیرید. گرفتن عکس‌های خانوادگی زیبا و ماندنی مستلزم تجهیزات گران‌قیمت و مهارت‌های حرفه‌یی نیست و صرفاً با استفاده‌ی عملی از اصول ساده و عقل سلیم می‌توان به این هدف رسید. این اصول بخت شما را در افزایش تعداد عکس‌های خوب در هر نوبت عکاسی بیش‌تر می‌کند و کمک می‌کند بتوانید آلبوم عکسی زیبا و نمونه داشته باشید و لحظه‌های خوب زندگی‌تان را با فرزندان‌تان ثبت کنید.\r\nبرای این‌که ثابت کنم سادگی اصلی موثر است تمام عکس‌هایی را که در این‌کتاب می‌بینید با یک دوربین سی‌وپنج‌میلی‌متری استاندارد و یک فلاش معمولی یا نور خورشید گرفته‌ام. در این‌کتاب اصلاً خبری از تکنیک‌های پیش‌رفته‌ی استودیویی نیست! می‌دانم که شما نمی‌خواهید شغل‌تان را تغییر دهید یا پول زیادی دارید که بخواهید تجهیزات گران‌قیمت بخرید. می‌دانم می‌خواهید قبل بزرگ‌شدن فرزندان‌تان عکس‌هایی زیبا و به‌یادماندنی از آن‌ها بگیرید. امیدوار ام با کمک این‌کتاب به این‌هدف برسید.	144	1-2-93719-600-978	320000	t	خشتی (23 در 23)	\N	t	f
+2	من می‌میرم اما یادها می‌ماند	images/Ich_sterbe_jeld_04_2_l.jpg	من می‌میرم اما یادها می‌ماند به‌لحاظ فورم، روایت، نثر و مفهوم به‌کلی با دیگر کتاب‌های هنینگ مانکل تفاوت دارد. این کتاب حاصل سفرهای پی‌درپی او به آفریقا و گفت‌وگوهای او با افرادی است که به بیماری ایدز مبتلا هستند. کتاب لحنی شاعرانه و نثری متین دارد و بر وجدان خواننده تاثیر عمیقی می‌گذارد. انتقادهای مانکل به انحصارات دارویی، توهین‌های شبه‌نژادپرستانه‌ی فرهنگی و زجری که مردم آفریقا می‌کشند با تعریفی که از شان و وقار و منزلت این مردم می‌دهد به‌خوبی ترکیب می‌شود و تصویری درست و دقیق از وضعیت موجود به‌دست می‌دهد.\r\nدر بخش دوم کتاب دفتر خاطرات زنی مبتلا به بیماری ایدز آورده شده که برای دخترش نوشته است تا پس از مرگ‌اش دخترش دست‌کم از توصیه‌های مادرش برخوردار بماند و تاحدی مادر خود را بشناسد. این دفتر بسیار تاثیرگذار است و به‌قلم یک انسان معمولی و با ساده‌ترین واژه‌ها نوشته شده است. مترجم نیز هوش‌مندانه این تغییر لحن و نثرها را رعایت کرده است.\r\nایدا، دخترکی که در خانواده‌یی مبتلا به بیماری ایدز هنوز مبتلا نشده است، نماد امید در این کتاب است و امید خود را در درخت انبه‌یی ریخته که حوالی خانه‌شان کاشته است.\r\nبخشی از متن کتاب:\r\n\r\nشبی از شب‌های ماه ژوئن سال 2003 مردگانی را در جنگل درختان سوزنی خواب می‌بینم. همه‌چیز در رویا روشن و واضح است: بوی خزه‌ها، بوی جنگلی که بعد از بارش باران دم کرده است. اما تابستان نیست. روی ریشه‌ها و تنه‌ی درختان قارچ روئیده است، یعنی در سرزمین خواب و رویا خزان حاکم است. سپتامبر یا شاید اکتبر است.\r\nپرندگانی نامرئی از شاخه‌های خیس پر می‌گیرند.\r\nمن خواب می‌بینم: خواب ِمردگان ِجنگل ِدرختان سوزنی. چهره‌ی مردگان بر تنه‌ی درختان کنده‌کاری شده است. انگار به تماشای نمایش‌گاهی از پیکره‌های چوبی ناتمام آمده‌ام، یا در نگارخانه‌یی به‌سر می‌برم که پیکرتراش آن شتاب‌زده آتلیه را ترک کرده باشد.\r\nصورت پیکره‌ها کژ و کوژ است و از دهان‌های نیم‌بازشان فریادی برنمی‌آید، تنها خموشی و سکوت بر فضا سایه افکنده است..\r\nچهره‌ها سیاه هستند، چهره‌های آفریقایی. جنگل اما در کشور سوئد رشد و نمو می‌کند.\r\nاین خواب و رویا ناگهانی بر من گذر کرد. آیا همه‌ی رویاها ناگهانی و به‌یک‌باره نمی‌آید؟ هیچ خواب و رویایی با نقشه‌ی ازپیش کشیده‌شده دیده نمی‌شود و خواب‌دیدن را نمی‌توان سفارش داد. خیال‌ها و تصویرهای شبانه، بی‌خبر بر خواب‌رفته ظاهر می‌شود بی‌آن‌که کسی بتواند در هنگامه‌ گذرشان از خود دفاع کند. بیش‌تر وقت‌ها این مهمانان ناخوانده بی‌آن‌که از خود اثری بر جا بگذارند از دید خواب‌رفته دور می‌شوند و از اثر گذرشان هیچ اطلاع و خبری برای خواب‌دیده باقی نمی‌ماند.\r\nخواب و رویا مثل شعبده‌بازان تردست است، الهام و ابتکاری کامل، هجومی یک‌باره که ابداً مهارشدنی نیست.\r\nاین خواب مرا سرشار از ناامنی و توحش می‌کند اما یک چیز در این میانه آشکار و روشن است. در یک موضوع تردید و ابهام وجود ندارد. سیاه‌پوستانی که چهره‌شان بر تنه‌ی درختان دیده می‌شود از بیماری ایدز مرده‌اند.\r\nپیکرها انگار پوستی هستند که بر استخوان‌ها کشیده شده است. مرده‌ها لاغر و استخوانی و نحیف اند، در چهره‌ی مردگان دردی بزرگ خودنمایی می‌کند. گویی همه مسخ شده‌اند، هیچ‌کجا آرامش یا حتا ناامیدی دیده نمی‌شود.\r\nفریادشان خاموش است.\r\n	124	5-4-93719-600-978	70000	t	رقعی (۱۴/۵ در ۲۱/۵)	\N	t	f
+\.
+
+
+--
+-- Data for Name: books_book_authors; Type: TABLE DATA; Schema: public; Owner: kharposht_db_user
+--
+
+COPY books_book_authors (id, book_id, author_id) FROM stdin;
+8	3	4
+10	1	1
+13	4	2
+14	2	8
+\.
+
+
+--
+-- Name: books_book_authors_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kharposht_db_user
+--
+
+SELECT pg_catalog.setval('books_book_authors_id_seq', 14, true);
+
+
+--
+-- Data for Name: books_book_editors; Type: TABLE DATA; Schema: public; Owner: kharposht_db_user
+--
+
+COPY books_book_editors (id, book_id, author_id) FROM stdin;
+\.
+
+
+--
+-- Name: books_book_editors_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kharposht_db_user
+--
+
+SELECT pg_catalog.setval('books_book_editors_id_seq', 1, false);
+
+
+--
+-- Name: books_book_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kharposht_db_user
+--
+
+SELECT pg_catalog.setval('books_book_id_seq', 4, true);
+
+
+--
+-- Data for Name: books_book_subjects; Type: TABLE DATA; Schema: public; Owner: kharposht_db_user
+--
+
+COPY books_book_subjects (id, book_id, subject_id) FROM stdin;
+8	3	2
+9	3	5
+11	1	1
+12	1	5
+15	4	6
+16	2	4
+\.
+
+
+--
+-- Name: books_book_subjects_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kharposht_db_user
+--
+
+SELECT pg_catalog.setval('books_book_subjects_id_seq', 16, true);
+
+
+--
+-- Data for Name: books_book_translators; Type: TABLE DATA; Schema: public; Owner: kharposht_db_user
+--
+
+COPY books_book_translators (id, book_id, author_id) FROM stdin;
+7	1	4
+8	2	5
+\.
+
+
+--
+-- Name: books_book_translators_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kharposht_db_user
+--
+
+SELECT pg_catalog.setval('books_book_translators_id_seq', 8, true);
+
+
+--
+-- Data for Name: books_edition; Type: TABLE DATA; Schema: public; Owner: kharposht_db_user
+--
+
+COPY books_edition (id, number, date, circulation, book_id) FROM stdin;
+\.
+
+
+--
+-- Name: books_edition_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kharposht_db_user
+--
+
+SELECT pg_catalog.setval('books_edition_id_seq', 1, false);
+
+
+--
+-- Data for Name: books_subject; Type: TABLE DATA; Schema: public; Owner: kharposht_db_user
+--
+
+COPY books_subject (id, name, description) FROM stdin;
+1	ادبیات ِجهان	ادبیات ِجهان
+2	ادبیات ِایران	ادبیات ِایران
+3	عکاسی	عکاسی
+4	خاطرات	خاطرات
+5	ادبیات ِداستانی	ادبیات ِداستانی
+6	هنر	هنر
+\.
+
+
+--
+-- Name: books_subject_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kharposht_db_user
+--
+
+SELECT pg_catalog.setval('books_subject_id_seq', 6, true);
+
+
+--
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: kharposht_db_user
+--
+
+COPY django_admin_log (id, action_time, user_id, content_type_id, object_id, object_repr, action_flag, change_message) FROM stdin;
+1	2014-09-22 09:04:41.018965-04	1	8	1	روبرتو بولانیو	1	
+2	2014-09-22 09:05:35.437624-04	1	8	2	جی فورمن	1	
+3	2014-09-22 09:08:58.812809-04	1	8	3	روبرت والزر	1	
+4	2014-09-22 09:11:56.415824-04	1	8	4	ونداد جلیلی	1	
+5	2014-09-22 09:13:17.194588-04	1	9	1	ادبیات ِجهان	1	
+6	2014-09-22 09:13:57.720065-04	1	10	1	شبانه‌ی شیلی	1	
+7	2014-09-22 09:16:26.124327-04	1	8	5	حمید درخشنده	1	
+8	2014-09-22 09:18:00.388224-04	1	10	2	من می‌میرم اما یادها می‌ماند	1	
+9	2014-09-22 09:21:47.628148-04	1	9	2	ادبیات ِایران	1	
+10	2014-09-22 09:22:08.267247-04	1	10	3	نوروزدرمانی	1	
+11	2014-09-22 09:26:09.073538-04	1	9	3	عکاسی	1	
+12	2014-09-22 09:27:14.777492-04	1	10	4	از کودکان‌تان عکس‌های گویا و جان‌دار بگیرید	1	
+13	2014-09-22 09:54:59.61576-04	1	8	3	روبرت والزر	3	
+14	2014-09-22 09:58:39.346898-04	1	8	6	آلیس مانرو	1	
+15	2014-09-22 09:59:05.266407-04	1	8	6	آلیس مانرو	2	No fields changed.
+16	2014-09-22 09:59:26.138859-04	1	8	6	آلیس مانرو	3	
+17	2014-09-22 10:30:24.16008-04	1	8	7	آلیس مانرو	1	
+18	2014-09-22 10:31:16.847989-04	1	8	7	آلیس مانرو	3	
+19	2014-09-22 10:39:15.462532-04	1	10	4	از کودکان‌تان عکس‌های گویا و جان‌دار بگیرید	2	Changed cut.
+20	2014-09-22 10:49:40.493923-04	1	8	8	هنینگ مانکل	1	
+21	2014-09-22 10:50:17.11412-04	1	8	8	هنینگ مانکل	2	Changed description.
+22	2014-09-22 10:52:18.437211-04	1	9	4	خاطرات	1	
+23	2014-09-22 10:52:31.078934-04	1	10	2	من می‌میرم اما یادها می‌ماند	2	Changed authors, translators and subjects.
+24	2014-09-22 11:40:22.887832-04	1	9	5	ادبیات ِداستانی	1	
+25	2014-09-22 11:41:47.473031-04	1	9	6	هنر	1	
+26	2014-09-22 11:42:36.942455-04	1	10	4	از کودکان‌تان عکس‌های گویا و جان‌دار بگیرید	2	Changed subjects.
+27	2014-09-22 11:42:52.801482-04	1	10	3	نوروزدرمانی	2	Changed subjects.
+28	2014-09-22 11:43:04.240942-04	1	10	2	من می‌میرم اما یادها می‌ماند	2	No fields changed.
+29	2014-09-22 11:43:17.602866-04	1	10	1	شبانه‌ی شیلی	2	Changed subjects.
+30	2014-09-22 11:46:51.917975-04	1	10	4	از کودکان‌تان عکس‌های گویا و جان‌دار بگیرید	2	Changed translators.
+31	2014-09-22 12:00:00.789189-04	1	10	4	از کودکان‌تان عکس‌های گویا و جان‌دار بگیرید	2	Changed description.
+32	2014-09-22 12:02:11.624072-04	1	10	4	از کودکان‌تان عکس‌های گویا و جان‌دار بگیرید	2	Changed description.
+33	2014-09-23 05:22:23.673414-04	1	10	2	من می‌میرم اما یادها می‌ماند	2	Changed description.
+34	2014-09-23 06:20:59.36426-04	1	8	4	ونداد جلیلی	2	Changed description.
+35	2014-09-23 06:21:47.656001-04	1	8	5	حمید درخشنده	2	Changed description.
+36	2014-09-23 06:23:20.527205-04	1	8	2	جی فورمن	2	Changed description.
+37	2014-09-23 06:24:12.539735-04	1	8	8	هنینگ مانکل	2	Changed description.
+38	2014-09-23 06:25:18.6329-04	1	8	1	روبرتو بولانیو	2	Changed description.
+39	2014-09-23 06:26:09.984481-04	1	8	1	روبرتو بولانیو	2	Changed description.
+40	2014-09-23 06:26:53.136245-04	1	8	1	روبرتو بولانیو	2	Changed description.
+41	2014-09-23 06:27:39.628875-04	1	8	1	روبرتو بولانیو	2	Changed description.
+42	2014-09-23 06:28:10.625665-04	1	8	1	روبرتو بولانیو	2	Changed description.
+43	2014-09-25 06:47:17.196438-04	1	8	8	هنینگ مانکل	2	Changed description.
+\.
+
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kharposht_db_user
+--
+
+SELECT pg_catalog.setval('django_admin_log_id_seq', 43, true);
+
+
+--
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: kharposht_db_user
+--
+
+COPY django_content_type (id, name, app_label, model) FROM stdin;
+1	permission	auth	permission
+2	group	auth	group
+3	user	auth	user
+4	content type	contenttypes	contenttype
+5	session	sessions	session
+6	site	sites	site
+7	log entry	admin	logentry
+8	author	books	author
+9	subject	books	subject
+10	book	books	book
+11	edition	books	edition
+\.
+
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kharposht_db_user
+--
+
+SELECT pg_catalog.setval('django_content_type_id_seq', 11, true);
+
+
+--
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: kharposht_db_user
+--
+
+COPY django_session (session_key, session_data, expire_date) FROM stdin;
+7ifhz7m8nkojmg7e33pf8xrt83q7qo2s	NTZmMmM3ZDkwNTE1Njc4NDFjYjJjMzMyZDliNjNmZjQ1ZmQ0ZjBlMDp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MX0=	2014-10-06 09:02:52.869822-04
+epozi1mj4kyqmw8gkxbgnbbig4m9odog	NDU1MWE5ZTZmMDY3YTE2MWJhOTQwZWQ1MWM5MDg3MjhjNjZhYjA0Mzp7fQ==	2014-10-09 09:57:37.565046-04
+\.
+
+
+--
+-- Data for Name: django_site; Type: TABLE DATA; Schema: public; Owner: kharposht_db_user
+--
+
+COPY django_site (id, domain, name) FROM stdin;
+1	example.com	example.com
+\.
+
+
+--
+-- Name: django_site_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kharposht_db_user
+--
+
+SELECT pg_catalog.setval('django_site_id_seq', 1, true);
+
+
+--
+-- Name: auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group
+    ADD CONSTRAINT auth_group_name_key UNIQUE (name);
+
+
+--
+-- Name: auth_group_permissions_group_id_permission_id_key; Type: CONSTRAINT; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_permission_id_key UNIQUE (group_id, permission_id);
+
+
+--
+-- Name: auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group
+    ADD CONSTRAINT auth_group_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_permission_content_type_id_codename_key; Type: CONSTRAINT; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_codename_key UNIQUE (content_type_id, codename);
+
+
+--
+-- Name: auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups_user_id_group_id_key; Type: CONSTRAINT; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_group_id_key UNIQUE (user_id, group_id);
+
+
+--
+-- Name: auth_user_pkey; Type: CONSTRAINT; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user
+    ADD CONSTRAINT auth_user_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions_user_id_permission_id_key; Type: CONSTRAINT; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_permission_id_key UNIQUE (user_id, permission_id);
+
+
+--
+-- Name: auth_user_username_key; Type: CONSTRAINT; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user
+    ADD CONSTRAINT auth_user_username_key UNIQUE (username);
+
+
+--
+-- Name: books_author_pkey; Type: CONSTRAINT; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+ALTER TABLE ONLY books_author
+    ADD CONSTRAINT books_author_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: books_book_authors_book_id_author_id_key; Type: CONSTRAINT; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+ALTER TABLE ONLY books_book_authors
+    ADD CONSTRAINT books_book_authors_book_id_author_id_key UNIQUE (book_id, author_id);
+
+
+--
+-- Name: books_book_authors_pkey; Type: CONSTRAINT; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+ALTER TABLE ONLY books_book_authors
+    ADD CONSTRAINT books_book_authors_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: books_book_editors_book_id_author_id_key; Type: CONSTRAINT; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+ALTER TABLE ONLY books_book_editors
+    ADD CONSTRAINT books_book_editors_book_id_author_id_key UNIQUE (book_id, author_id);
+
+
+--
+-- Name: books_book_editors_pkey; Type: CONSTRAINT; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+ALTER TABLE ONLY books_book_editors
+    ADD CONSTRAINT books_book_editors_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: books_book_pkey; Type: CONSTRAINT; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+ALTER TABLE ONLY books_book
+    ADD CONSTRAINT books_book_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: books_book_subjects_book_id_subject_id_key; Type: CONSTRAINT; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+ALTER TABLE ONLY books_book_subjects
+    ADD CONSTRAINT books_book_subjects_book_id_subject_id_key UNIQUE (book_id, subject_id);
+
+
+--
+-- Name: books_book_subjects_pkey; Type: CONSTRAINT; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+ALTER TABLE ONLY books_book_subjects
+    ADD CONSTRAINT books_book_subjects_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: books_book_translators_book_id_author_id_key; Type: CONSTRAINT; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+ALTER TABLE ONLY books_book_translators
+    ADD CONSTRAINT books_book_translators_book_id_author_id_key UNIQUE (book_id, author_id);
+
+
+--
+-- Name: books_book_translators_pkey; Type: CONSTRAINT; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+ALTER TABLE ONLY books_book_translators
+    ADD CONSTRAINT books_book_translators_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: books_edition_pkey; Type: CONSTRAINT; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+ALTER TABLE ONLY books_edition
+    ADD CONSTRAINT books_edition_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: books_subject_pkey; Type: CONSTRAINT; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+ALTER TABLE ONLY books_subject
+    ADD CONSTRAINT books_subject_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_log_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_content_type_app_label_model_key; Type: CONSTRAINT; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+ALTER TABLE ONLY django_content_type
+    ADD CONSTRAINT django_content_type_app_label_model_key UNIQUE (app_label, model);
+
+
+--
+-- Name: django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+ALTER TABLE ONLY django_content_type
+    ADD CONSTRAINT django_content_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+ALTER TABLE ONLY django_session
+    ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
+
+
+--
+-- Name: django_site_pkey; Type: CONSTRAINT; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+ALTER TABLE ONLY django_site
+    ADD CONSTRAINT django_site_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group_name_like; Type: INDEX; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE INDEX auth_group_name_like ON auth_group USING btree (name varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_permissions_group_id; Type: INDEX; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE INDEX auth_group_permissions_group_id ON auth_group_permissions USING btree (group_id);
+
+
+--
+-- Name: auth_group_permissions_permission_id; Type: INDEX; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE INDEX auth_group_permissions_permission_id ON auth_group_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_permission_content_type_id; Type: INDEX; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE INDEX auth_permission_content_type_id ON auth_permission USING btree (content_type_id);
+
+
+--
+-- Name: auth_user_groups_group_id; Type: INDEX; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE INDEX auth_user_groups_group_id ON auth_user_groups USING btree (group_id);
+
+
+--
+-- Name: auth_user_groups_user_id; Type: INDEX; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE INDEX auth_user_groups_user_id ON auth_user_groups USING btree (user_id);
+
+
+--
+-- Name: auth_user_user_permissions_permission_id; Type: INDEX; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE INDEX auth_user_user_permissions_permission_id ON auth_user_user_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_user_user_permissions_user_id; Type: INDEX; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE INDEX auth_user_user_permissions_user_id ON auth_user_user_permissions USING btree (user_id);
+
+
+--
+-- Name: auth_user_username_like; Type: INDEX; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE INDEX auth_user_username_like ON auth_user USING btree (username varchar_pattern_ops);
+
+
+--
+-- Name: books_book_authors_author_id; Type: INDEX; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE INDEX books_book_authors_author_id ON books_book_authors USING btree (author_id);
+
+
+--
+-- Name: books_book_authors_book_id; Type: INDEX; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE INDEX books_book_authors_book_id ON books_book_authors USING btree (book_id);
+
+
+--
+-- Name: books_book_cover_designer_id; Type: INDEX; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE INDEX books_book_cover_designer_id ON books_book USING btree (cover_designer_id);
+
+
+--
+-- Name: books_book_editors_author_id; Type: INDEX; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE INDEX books_book_editors_author_id ON books_book_editors USING btree (author_id);
+
+
+--
+-- Name: books_book_editors_book_id; Type: INDEX; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE INDEX books_book_editors_book_id ON books_book_editors USING btree (book_id);
+
+
+--
+-- Name: books_book_subjects_book_id; Type: INDEX; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE INDEX books_book_subjects_book_id ON books_book_subjects USING btree (book_id);
+
+
+--
+-- Name: books_book_subjects_subject_id; Type: INDEX; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE INDEX books_book_subjects_subject_id ON books_book_subjects USING btree (subject_id);
+
+
+--
+-- Name: books_book_translators_author_id; Type: INDEX; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE INDEX books_book_translators_author_id ON books_book_translators USING btree (author_id);
+
+
+--
+-- Name: books_book_translators_book_id; Type: INDEX; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE INDEX books_book_translators_book_id ON books_book_translators USING btree (book_id);
+
+
+--
+-- Name: books_edition_book_id; Type: INDEX; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE INDEX books_edition_book_id ON books_edition USING btree (book_id);
+
+
+--
+-- Name: django_admin_log_content_type_id; Type: INDEX; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE INDEX django_admin_log_content_type_id ON django_admin_log USING btree (content_type_id);
+
+
+--
+-- Name: django_admin_log_user_id; Type: INDEX; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE INDEX django_admin_log_user_id ON django_admin_log USING btree (user_id);
+
+
+--
+-- Name: django_session_expire_date; Type: INDEX; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE INDEX django_session_expire_date ON django_session USING btree (expire_date);
+
+
+--
+-- Name: django_session_session_key_like; Type: INDEX; Schema: public; Owner: kharposht_db_user; Tablespace: 
+--
+
+CREATE INDEX django_session_session_key_like ON django_session USING btree (session_key varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_permissions_permission_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_permission_id_fkey FOREIGN KEY (permission_id) REFERENCES auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_groups_group_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_group_id_fkey FOREIGN KEY (group_id) REFERENCES auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_user_permissions_permission_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_permission_id_fkey FOREIGN KEY (permission_id) REFERENCES auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: book_id_refs_id_0a3634f3; Type: FK CONSTRAINT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY books_book_authors
+    ADD CONSTRAINT book_id_refs_id_0a3634f3 FOREIGN KEY (book_id) REFERENCES books_book(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: book_id_refs_id_66006382; Type: FK CONSTRAINT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY books_book_translators
+    ADD CONSTRAINT book_id_refs_id_66006382 FOREIGN KEY (book_id) REFERENCES books_book(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: book_id_refs_id_c889a9da; Type: FK CONSTRAINT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY books_book_editors
+    ADD CONSTRAINT book_id_refs_id_c889a9da FOREIGN KEY (book_id) REFERENCES books_book(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: book_id_refs_id_febdc48c; Type: FK CONSTRAINT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY books_book_subjects
+    ADD CONSTRAINT book_id_refs_id_febdc48c FOREIGN KEY (book_id) REFERENCES books_book(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: books_book_authors_author_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY books_book_authors
+    ADD CONSTRAINT books_book_authors_author_id_fkey FOREIGN KEY (author_id) REFERENCES books_author(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: books_book_cover_designer_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY books_book
+    ADD CONSTRAINT books_book_cover_designer_id_fkey FOREIGN KEY (cover_designer_id) REFERENCES books_author(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: books_book_editors_author_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY books_book_editors
+    ADD CONSTRAINT books_book_editors_author_id_fkey FOREIGN KEY (author_id) REFERENCES books_author(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: books_book_subjects_subject_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY books_book_subjects
+    ADD CONSTRAINT books_book_subjects_subject_id_fkey FOREIGN KEY (subject_id) REFERENCES books_subject(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: books_book_translators_author_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY books_book_translators
+    ADD CONSTRAINT books_book_translators_author_id_fkey FOREIGN KEY (author_id) REFERENCES books_author(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: books_edition_book_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY books_edition
+    ADD CONSTRAINT books_edition_book_id_fkey FOREIGN KEY (book_id) REFERENCES books_book(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: content_type_id_refs_id_d043b34a; Type: FK CONSTRAINT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT content_type_id_refs_id_d043b34a FOREIGN KEY (content_type_id) REFERENCES django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log_content_type_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_log_content_type_id_fkey FOREIGN KEY (content_type_id) REFERENCES django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_log_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: group_id_refs_id_f4b32aac; Type: FK CONSTRAINT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT group_id_refs_id_f4b32aac FOREIGN KEY (group_id) REFERENCES auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: user_id_refs_id_40c41112; Type: FK CONSTRAINT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT user_id_refs_id_40c41112 FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: user_id_refs_id_4dc23c39; Type: FK CONSTRAINT; Schema: public; Owner: kharposht_db_user
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT user_id_refs_id_4dc23c39 FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
