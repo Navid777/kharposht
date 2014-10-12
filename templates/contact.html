@@ -67,11 +67,23 @@
 					<textarea id="mailMessage" class="form-control" style="height:200px;"> </textarea>
 				</div>
 				<div>
-					<button class="form-control btn btn-default col-sm-2 col-md-2" onclick="send_mail()">ارسال ِپیام</button>
+					<button class="form-control btn btn-default col-sm-2 col-md-2" onclick="popup()">ارسال ِپیام</button>
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
+	<div id="dialog-overlay"> </div>
+    <div id="dialog-box">
+        <div class="dialog-content">
+        	<div>
+        		<img class="dialog-logo" style="height:50px; max-width:20%; margin-top: -20px;" src="/media/images/logo-kharposht.gif"/>
+            	<label id="dialog-message" style="max-width:70%; padding-top:20px;">
+            		پیام شما ارسال شد.
+            	</label>
+           </div>
+            <a onclick="hidemessage()" class="button">بازگشت</a>
+        </div>
+    </div>
 </article>
 {% endblock %}
