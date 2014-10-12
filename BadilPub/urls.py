@@ -29,7 +29,7 @@ urlpatterns = patterns('',
     url(r'^published/$', views.published_books),
     url(r'^about_us/$', views.about_us),
     url(r'^search/([\w,\-,\s]+)/$', views.search),
-    url(r'^send_mail/$', views.send_mail),
+    url(r'^send_mail/$', views.send_mail_from_server),
 )
 
 if settings.DEBUG:
