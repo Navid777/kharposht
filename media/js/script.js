@@ -27,7 +27,7 @@ function send_mail(){
             type: 'POST',
             url: '/send_mail/',
             data : {
-            	message: $("#mailName")+":\n"+$("#mailMessage").val(),
+            	message: $("#mailName").val()+":\n"+$("#mailMessage").val(),
             	subject: $("#mailSubject").val(),
 				to: $("#mailTo").val(),
 				from: $("#mailMail").val()
