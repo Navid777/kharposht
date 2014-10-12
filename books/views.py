@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-s
 from books.models import Book, Author, Subject
+from django.core.mail import send_mail
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
