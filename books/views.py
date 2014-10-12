@@ -121,3 +121,19 @@ def published_books(request):
 
 def about_us(request):
     return render(request, 'about_us.html')
+
+@csrf_exempt
+def send_mail_from_server(request):
+    if request.method == "POST":
+        try:
+            subject = request.POST['subject']
+            message = request.POST['message']
+            from_mail = request.POST['from']
+            to_mail = request.POST['to']
+            send_mail(subject, message, from_mail, [to_mail], fail_silently=False)
+            #send_mail("salam", "salam", "contact@vandadjalili.com", ["contact@vandadjalili.com"], fail_silently=False)
+            return render(request, 'json/success.json')
+        except SMTPException:
+            return render(request, 'json/error.json')
+    else:
+        return HttpResponseNotAllowed(request)

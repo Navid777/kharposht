@@ -22,6 +22,27 @@ function search(){
 	var term = $("#search-query").val();
 	location.replace("/search/"+term);
 };
+function send_mail(){
+	    $.ajax({
+            type: 'POST',
+            url: '/send_mail/',
+            data : {
+            	message: $("#mailMessage").val(),
+            	subject: $("#mailSubject").val(),
+				to: $("#mailTo").val(),
+				from: $("#mailMail").val()
+			},
+            dataType: 'json',
+            success: function(data) {
+            	if(data.success){
+            		alert("پیام شما ارسال شد");
+            	}
+            	else{
+            		alert("خطا در ارسال پیام");
+            	}
+            }
+        });
+}
 window.navid_resize_book_shelves = function () {
     return $(".book-shelf").each(function (e, t) {
         var books, n, s, o, a, r, l, u, c;
