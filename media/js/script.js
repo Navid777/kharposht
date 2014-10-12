@@ -27,7 +27,7 @@ function send_mail(){
             type: 'POST',
             url: '/send_mail/',
             data : {
-            	message: $("#mailMessage").val(),
+            	message: $("#mailName")+":\n"+$("#mailMessage").val(),
             	subject: $("#mailSubject").val(),
 				to: $("#mailTo").val(),
 				from: $("#mailMail").val()
@@ -35,7 +35,7 @@ function send_mail(){
             dataType: 'json',
             success: function(data) {
             	if(data.success){
-            		alert("پیام شما ارسال شد");
+            		popup();
             	}
             	else{
             		alert("خطا در ارسال پیام");
