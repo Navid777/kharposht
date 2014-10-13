@@ -25,7 +25,29 @@ class Subject(models.Model):
     
     def __unicode__(self):
         return self.name
+
+class News(models.Model):
+    title = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='images/', blank=True, null=True)
+    description = models.TextField()
+    subjects = models.ManyToManyField(Subject, blank=True, null=True)
     
+    def __unicode__(self):
+        return self.title
+    
+class Article(models.Model):
+    title = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='images/', blank=True, null=True)
+    description = models.TextField()
+    subjects = models.ManyToManyField(Subject, blank=True, null=True)
+    author = models.CharField(max_length=100, blank=True, null=True)
+    translator = models.CharField(max_length=100, blank=True, null=True)
+    author_link = models.CharField(max_length=100, blank=True, null=True)
+    translator_link = models.CharField(max_length=100, blank=True, null=True)
+    
+    def __unicode__(self):
+        return self.title
+
 class Book(models.Model):
     title = models.CharField(max_length=100)
     authors = models.ManyToManyField(Author, related_name="authors")
@@ -57,3 +79,5 @@ admin.site.register(Author)
 admin.site.register(Book)
 admin.site.register(Subject)
 admin.site.register(Edition)
+admin.site.register(News)
+admin.site.register(Article)

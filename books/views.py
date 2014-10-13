@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-s
-from books.models import Book, Author, Subject
+from books.models import Book, Author, Subject, News, Article
 from django.core.mail import send_mail
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
@@ -82,7 +82,7 @@ def book(request, id):
         'books': books,
         'book_width': book_width,
     })
-    
+
 def all_books(request):
     books = Book.objects.all()
     book_width = 4
@@ -112,14 +112,34 @@ def books_by_subject(request, id):
     title = Subject.objects.get(id=id).name
     return render(request, 'book_list.html', {'books':books, 'title':title})
 
+def news_by_subject(request, id):
+    news = News.objects.filter(subjects=id)
+    title = "اخبار"
+    return render(request, 'book_list.html', {'books':news, 'title':title})
+
+def all_news(request):
+    news = News.objects.all()
+    title = "اخبار"
+    return render(request, 'book_list.html', {'books':news, 'title':title})
+
+def articles_by_subject(request, id):
+    articles = Article.objects.filter(subjects=id)
+    title = "مقالات"
+    return render(request, 'book_list.html', {'books':articles, 'title':title})
+
+def all_articles(request):
+    articles = Article.objects.all()
+    title = "مقالات"
+    return render(request, 'book_list.html', {'books':articles, 'title':title})
+
 def not_published_books(request):
     books = Book.objects.filter(published=False)
-    title = "منتشرنشده"
+    title = "منتشر می‌شود"
     return render(request, 'book_list.html', {'books':books, 'title':title})
 
 def published_books(request):
     books = Book.objects.filter(published=True)
-    title="منتشرشده"
+    title="منتشر شد"
     return render(request, 'book_list.html', {'books':books, 'title':title})
 
 def about_us(request):

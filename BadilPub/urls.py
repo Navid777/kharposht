@@ -30,6 +30,10 @@ urlpatterns = patterns('',
     url(r'^about_us/$', views.about_us),
     url(r'^search/([\w,\-,\s]+)/$', views.search),
     url(r'^send_mail/$', views.send_mail_from_server),
+    url(r'^all_news/$', views.all_news),
+    url(r'^news_by_subject/(\d+)$', views.news_by_subject),
+    url(r'^all_articles/$', views.all_articles),
+    url(r'^articles_by_subject/(\d+)$', views.articles_by_subject),
 )
 
 if settings.DEBUG:
