@@ -81,6 +81,7 @@ def book(request, id):
         'book': book,
         'books': books,
         'book_width': book_width,
+        'mode':1
     })
 
 def all_books(request):
@@ -90,6 +91,7 @@ def all_books(request):
     return render(request, 'book_list.html', {
         'books': books,
         'title':title,
+        'mode':1
     })
 
 def author_list(request, first):
@@ -110,40 +112,80 @@ def contact_us(request):
 def books_by_subject(request, id):
     books = Book.objects.filter(subjects=id)
     title = Subject.objects.get(id=id).name
-    return render(request, 'book_list.html', {'books':books, 'title':title})
+    return render(request, 'book_list.html', {'books':books, 'title':title, 'mode':1})
 
 def news_by_subject(request, id):
     news = News.objects.filter(subjects=id)
     title = "اخبار"
-    return render(request, 'book_list.html', {'books':news, 'title':title})
+    return render(request, 'book_list.html', {'books':news, 'title':title, 'mode':3})
 
 def all_news(request):
     news = News.objects.all()
     title = "اخبار"
-    return render(request, 'book_list.html', {'books':news, 'title':title})
+    return render(request, 'book_list.html', {'books':news, 'title':title, 'mode':3})
 
 def articles_by_subject(request, id):
     articles = Article.objects.filter(subjects=id)
     title = "مقالات"
-    return render(request, 'book_list.html', {'books':articles, 'title':title})
+    return render(request, 'book_list.html', {'books':articles, 'title':title, 'mode':2})
 
 def all_articles(request):
     articles = Article.objects.all()
     title = "مقالات"
-    return render(request, 'book_list.html', {'books':articles, 'title':title})
+    return render(request, 'book_list.html', {'books':articles, 'title':title, 'mode':2})
 
 def not_published_books(request):
     books = Book.objects.filter(published=False)
     title = "منتشر می‌شود"
-    return render(request, 'book_list.html', {'books':books, 'title':title})
+    return render(request, 'book_list.html', {'books':books, 'title':title, 'mode':1})
 
 def published_books(request):
     books = Book.objects.filter(published=True)
     title="منتشر شد"
-    return render(request, 'book_list.html', {'books':books, 'title':title})
+    return render(request, 'book_list.html', {'books':books, 'title':title, 'mode':1})
 
 def about_us(request):
     return render(request, 'about_us.html')
+
+def article(request, id):
+    article = get_object_or_404(Article, id=id)
+    articles = None
+    if not articles :
+        article_width = 0
+    elif articles.count() == 1:
+        article_width = 12
+    elif articles.count() == 2:
+        article_width = 6
+    elif articles.count() == 3:
+        article_width = 4
+    else:
+        article_width = 3
+    return render(request, 'book.html', {
+        'book': article,
+        'books': articles,
+        'book_width': article_width,
+        'mode':2,
+    })
+
+def news(request, id):
+    news = get_object_or_404(News, id=id)
+    newss = None
+    if not newss :
+        news_width = 0
+    elif newss.count() == 1:
+        news_width = 12
+    elif newss.count() == 2:
+        news_width = 6
+    elif newss.count() == 3:
+        news_width = 4
+    else:
+        news_width = 3
+    return render(request, 'book.html', {
+        'book': news,
+        'books': newss,
+        'book_width': news_width,
+        'mode': 3
+    })
 
 @csrf_exempt
 def send_mail_from_server(request):

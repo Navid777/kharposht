@@ -1,14 +1,13 @@
 {% extends 'base.html' %}
-
 {% block facebook_meta%}
 <meta property="og:title" content="{{book.title}}">
 <meta property="og:locale" content="fa_IR">
 <meta property="og:site_name" content="خارپشت">
 <meta property="og:description" content="{{book.description}}">
+{% if book.image%}
 <meta property="og:image" content="http://www.kharposht.ir/{{book.image.url}}">
-
+{% endif %}
 {% endblock %}
-
 {% block content %}
 <article class="transparent">
 	
@@ -17,22 +16,36 @@
 		<div class="row">
 			<div class="col-sm-3 col-md-3">
 				<div align="center">
+				{% if book.image%}
 				<a href="">
 					<img style="max-width: 95%;" src="{{book.image.url}}">
 				</a>
+				{% else %}
+				<a href="">
+					<div style="max-width: 95%; background-color:gray; height:325px;"> </div>
+				</a>
+				{% endif %}
 				</div>
+				{% if book.pages %}
 				<div align="center" style="margin-top:5%; font-size:15px;">
 				{{book.pages}} صفحه
 				</div>
+				{% endif %}
+				{% if book.ISBN %}
 				<div align="center" style="font-size:15px;">
 					شابک: {{book.ISBN}}
 				</div>
+				{% endif %}
+				{% if book.price %}
 				<div align="center" style="font-size:15px;">
 					 {{book.price}} ریال 
 				</div>
+				{% endif %}
+				{% if book.cut %}
 				<div align="center" style="font-size:15px;">
-					 قطع: {{book.cut}}
+					قطع: {{book.cut}}
 				</div>
+				{% endif %}
 			</div>
 			<div class="col-sm-9 col-md-9" style="text-align:justify;">
 				<div class="row">
@@ -40,6 +53,7 @@
 						<h1>
 							{{book.title}}
 						</h1>
+						{% if book.authors %}
 						<div class="book_authors">
 							نویسنده:
 							{% for a in book.authors.all %}
@@ -47,6 +61,14 @@
 							{% if not forloop.last %}, {% endif %}
 							{% endfor %}
 						</div>
+						{% endif %}
+						{% if book.author %}
+						<div class="book_authors">
+							نویسنده:
+							<a href="{{book.author_link}}">{{book.author}}</a>
+						</div>
+						{% endif %}
+						{% if book.translators%}
 						<div class="book_authors">
 							{% ifnotequal book.translators.count 0%}
 							مترجم:
@@ -56,14 +78,32 @@
 							{% endfor %}
 							{% endifnotequal %}
 						</div>
+						{% endif %}
+						{% if book.translator %}
+						<div class="book_authors">
+							مترجم:
+							<a href="{{book.translator_link}}">{{book.translator}}</a>
+						</div>
+						{% endif %}
 					</div>
 					<div class="col-sm-1 col-md-1">
+						{% ifequal mode 1%}
 						<a href="http://www.facebook.com/sharer.php?u=http://kharposht.ir/books/{{book.id}}" style="text-decoration: none;">
 						<img src="/media/images/facebook.png" style="height:30px; margin-top:20px;">
 						</a>
+						{% endifequal %}
+						{% ifequal mode 2%}
+						<a href="http://www.facebook.com/sharer.php?u=http://kharposht.ir/article/{{book.id}}" style="text-decoration: none;">
+						<img src="/media/images/facebook.png" style="height:30px; margin-top:20px;">
+						</a>
+						{% endifequal %}
+						{% ifequal mode 3%}
+						<a href="http://www.facebook.com/sharer.php?u=http://kharposht.ir/news/{{book.id}}" style="text-decoration: none;">
+						<img src="/media/images/facebook.png" style="height:30px; margin-top:20px;">
+						</a>
+						{% endifequal %}
 					</div>
 				</div>
-				
 					{{ book.description|linebreaks}}
 			</div>
 
@@ -71,9 +111,23 @@
 	</div>
 </section>
 
+{% ifequal mode 1%}
 {% if books %}
-{% include 'partials/books.html' with books=books width=book_width title="کتاب‌های دیگر ِپدیدآورنده‌گان"%}
+{% include 'partials/books.html' with books=books width=book_width mode=mode title="کتاب‌های دیگر ِپدیدآورنده‌گان"%}
 {% endif %}
+{% endifequal %}
+
+{% ifequal mode 2%}
+{% if books %}
+{% include 'partials/books.html' with books=books width=book_width mode=mode title="مقالات مرتبط"%}
+{% endif %}
+{% endifequal %}
+
+{% ifequal mode 3%}
+{% if books %}
+{% include 'partials/books.html' with books=books width=book_width mode=mode title="اخبار مرتبط"%}
+{% endif %}
+{% endifequal %}
 
 </article>
 {% endblock %}

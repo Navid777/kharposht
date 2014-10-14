@@ -34,6 +34,8 @@ urlpatterns = patterns('',
     url(r'^news_by_subject/(\d+)$', views.news_by_subject),
     url(r'^all_articles/$', views.all_articles),
     url(r'^articles_by_subject/(\d+)$', views.articles_by_subject),
+    url(r'^article/(\d+)$', views.article),
+    url(r'^news/(\d+)$', views.news),
 )
 
 if settings.DEBUG:
