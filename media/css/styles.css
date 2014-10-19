@@ -1,6 +1,7 @@
 @font-face{
 	font-family: "BMitra";
-	src: url("../fonts/BMITRABD.TTF");
+		src: url("../fonts/BMITRABD.otf") format('opentype'), 
+		     url("../fonts/BMITRABD.TTF") format('truetype');
 }
 
 ul {
