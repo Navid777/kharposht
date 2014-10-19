@@ -59,6 +59,7 @@ def author(request, id):
         'author': author,
         'books': books,
         'book_width': book_width,
+        'mode': 1,
     })
 
 def book(request, id):
