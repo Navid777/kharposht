@@ -3,7 +3,7 @@
 <meta property="og:title" content="{{book.title}}">
 <meta property="og:locale" content="fa_IR">
 <meta property="og:site_name" content="خارپشت">
-<meta property="og:description" content="{{book.description}}">
+<meta property="og:description" content="{{book.description|striptags}}">
 {% if book.image%}
 <meta property="og:image" content="http://www.kharposht.ir/{{book.image.url}}">
 {% endif %}
