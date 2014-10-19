@@ -12,7 +12,9 @@
     <meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, initial-scale=1.0">
     <meta name="format-detection" content="telephone=no">
     <title>نشر خارپشت</title>
+    {% endautoescape %}
     {% block facebook_meta%}{%endblock%}
+    {% autoescape off %}
     <link rel="SHORTCUT ICON" href="/media/images/favicon_us.ico">
     <link href="{{ MEDIA_URL }}css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="{{ MEDIA_URL }}css/bootstrap-rtl.min.css" rel="stylesheet" type="text/css">
