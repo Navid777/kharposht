@@ -1,13 +1,14 @@
 <div class="container book-shelf">
 	<div class="row">
 		<div class="col-sm-12 col-md-12">
-			<h3 class="centered">{{title}}</h3>
+			<h3 class="centered hidden-sm hidden-xs">{{title}}</h3>
+			<h4 class="centered hidden-lg hidden-md">{{title}}</h4>
 		</div>
 	</div>
 	<div class="row books">
 		{% for b in books%}
 		<div class="col-sm-6 col-md-6 centered">
-			<div class="col-sm-4 col-md-4 navid-book-shelf-book">
+			<div class="col-sm-4 col-md-4 navid-book-shelf-book m-book-shelf-book">
 					{% ifequal mode 1%}
 					<a  href="/books/{{ b.id }}/">
 						{% if b.image %}
@@ -106,7 +107,7 @@
                 </div>
                 {% endif %} 
 			</div>
-			<div class="col-sm-8 col-md-8 navid-book-shelf-book featured" data-featured="true">
+			<div class="col-sm-8 col-md-8 navid-book-shelf-book m-book-shelf-book featured hidden-sm hidden-xs" data-featured="true">
 				<hr class="hidden-sm">
 				{% ifequal mode 1%}
 				<div class="title" href="/books/{{b.id}}"> </div>

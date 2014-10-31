@@ -55,18 +55,24 @@
             </div>
         </div>
     </div>
-    <div id="navbar-main" class="navbar navbar-default">
+    <div id="navbar-main" class="navbar navbar-default hidden-sm hidden-xs">
         <div class="container">
             <div class="clearfix">
             <!--<button type="button" class="navbar-toggle" data-toggle="collapse"
                     data-target=".nav-collapse">
                 <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-            </button> -->
-            <div class="pull-left navbar-form">
+            </button>-->
+            <div class="pull-left navbar-form hidden-sm hidden-xs">
                 <div>
                     <input id="search-query" name="query" placeholder="جست‌وجو"
                            class="form-control" type="search">
                     <input class="form-control pull-left" value="" onclick="search()" style=" width:inherit; background:url(/media/images/magnifier12.png) no-repeat; background-size: 100%; padding-left:20px; border:0" type="submit">
+                </div>
+            </div>
+            <div class="pull-left navbar-form hidden-md hidden-lg" style="display:block; width:100%;">
+                <div>
+                    <input id="search-query" name="query" placeholder="جست‌وجو"
+                           class="form-control" type="search">
                 </div>
             </div>
             <a href="/">
@@ -81,12 +87,11 @@
                        data-href="#" data-toggle="dropdown" id="books_nav_link"
                        name="&amp;lpos=us-books-dropdown" role="button">کتاب‌ها <b class="caret hidden-sm hidden-md"></b></a>
 
-                    <div class="dropdown-menu menu_dropshadow hidden-sm hidden-md" role="menu">
+                    <div class="dropdown-menu menu_dropshadow" role="menu">
                         <ul>
                             <!--<h4>Explore</h4> -->
                             <li><a href="/published">منتشر شد</a></li>
                             <li><a href="/not_published">منتشر می‌شود</a></li>
-                            <!--<li><a href="#">پرفروش‌ترین‌ها</a></li> -->
                             <li><a href="/books_by_subject/2">ادبیات ِایران</a></li>
                             <li><a href="/books_by_subject/1">ادبیات ِجهان</a></li>
                             <li class="disabled"><a href="">پیش‌نهاد ِما</a></li>
@@ -120,6 +125,58 @@
             </div>
         </div>
     </div>
+	<div id="navbar-main-sm" class="navbar navbar-default hidden-md hidden-lg">
+		<div class="container">
+			<div class="clearfix">
+				<div class="col-sm-12 col-xs-12"  id="accordion" role="tablist" aria-multiselectable="true" >
+					<button type="button" class="navbar-toggle" style="" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+	               		<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+	            	</button>
+					
+		            <div><a href="/" style="margin-right:auto; margin-left:auto; bottom:6px; left:50px; position:absolute; font-size:15px; max-length:40%;">وب‌سایت نشر خارپشت</a></div>
+					<a href="/">
+			            <div class="navbar-brand" style="padding:0; margin-top:5%;">
+			            	<img src="/media/images/logo-kharposht.gif" style=" height:98%; background-color:#E0EFD3;">
+			            </div>
+		            </a>
+                    <div class="dropdown-menu menu_dropshadow panel-collapse collapse" role="menu" id="collapseOne" role="tabpanel" aria-labelledby="headingOne">
+                        <ul>
+                            <!--<h4>Explore</h4> -->
+                            <li><a href="/published">منتشر شد</a></li>
+                            <li><a href="/not_published">منتشر می‌شود</a></li>
+                            <li><a href="/books_by_subject/2">ادبیات ِایران</a></li>
+                            <li><a href="/books_by_subject/1">ادبیات ِجهان</a></li>
+                            <li><a href="/all_news/">اخبار</a></li>
+                            <li><a href="/all_articles/">مقالات</a></li>
+                            <li class="disabled"><a href="">پیش‌نهاد ِما</a></li>
+                        </ul>
+                        <hr/>
+                        <ul class="">
+                            <li><a href="/books_by_subject/5">داستانی</a></li>
+                            <li><a href="/books_by_subject/6">هنر</a></li>
+                            <li><a href="/books_by_subject/4" class="disabled">خاطرات</a></li>
+                            <li><a href="/all_books">همه‌ی ِدسته‌ها</a></li>
+                        </ul>
+                        <!--
+                        <ul class="borderless">
+                            <h4>&nbsp;</h4> 
+                            <li><a href=""
+                                   name="&amp;lpos=us-books-dropdown">Ready to Read</a></li>
+
+                        </ul> -->
+                   </div>
+  					
+            	</div>
+            	<div class="col-sm-12 col-xs-12">
+	            	<div class="navbar-form">
+		                <form action="/m/search/">
+		                    <input type="search" id="search-query-sm" name="search" placeholder="جست‌وجو" class="form-control"/>
+		                </form>
+	            	</div>
+            	</div>
+			</div>
+		</div>
+	</div>
 </header>
 
 {% block content %}
@@ -135,9 +192,9 @@
 	<div class="icon_container centered">
 		 <a href="/"><img src="/media/icons/icon_home.png"></a>
 		 <a href="/contact_us/"><img src="/media/icons/icon_mail.png"></a>
-		 <a href="/contact_us/"><img src="/media/icons/icon_phone.png"></a>
+		 <!--<a href="/contact_us/"><img src="/media/icons/icon_phone.png"></a>
 		 <img src="/media/icons/icon_gift.png">
-		 <img src="/media/icons/icon_download.png">
+		 <img src="/media/icons/icon_download.png">-->
 		 <img src="/media/icons/icon_facebook.png">
 		 <img src="/media/icons/icon_instagram.png">
 		 </div>
@@ -155,6 +212,7 @@
 <script type="text/javascript">
 	window.navid_resize_book_shelves();
     window.resize_book_shelves();
+    window.mobile_resize_book_shelves();
     
     $billboardDropdown = $('.dropdown-menu', '#billboard .sidebar');
 
@@ -166,6 +224,13 @@
     $('.dropdown-menu > .close').click(function (e) {
         e.preventDefault();
         $billboardDropdown.toggle();
+    });
+  	$('.navbar-toggle').on('touchstart', function (e) {
+  		$('.navbar-toggle').trigger('blur');
+  		$('.navbar-toggle').trigger('unhover');
+    });
+    $('.navbar-toggle').click(function(e){
+    	$('.navbar-toggle').trigger('blur');
     });
 </script>
 

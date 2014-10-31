@@ -5,7 +5,7 @@
 <div class="container">
 <div class="row noted_authors visible-lg">
 	{% for n in noted%}
-	<div class="author col-sm-4 col-md-4">
+	<div class="author col-sm-6 col-xs-6 col-md-4">
         <div class="row">
             <div class="col-sm-2 col-md-2">
                 <a href="/authors/{{ n.id }}"
@@ -30,9 +30,9 @@
 
 <div class="row noted_authors hidden-lg">
 	{% for n in noted%}
-	<div class="author col-sm-6 col-md-6">
+	<div class="author col-sm-6 col-xs-6 col-md-6">
     <div class="row">
-        <div class="additional-spacing col-sm-2 col-md-2">
+        <div class="additional-spacing col-sm-12 col-xs-12 col-md-2">
             <a href="/authors/{{ n.id }}"
                name="&amp;lpos=us-noted-authors-homepage"><img class="noted_author_image" 
                												   alt="{{ n.full_name }}"
@@ -44,16 +44,19 @@
                                title="{{ n.full_name }}"></noscript>
             </a>
         </div>
-        <div class="col-sm-10 col-md-10">
+        <div class="col-md-10  hidden-xs hidden-sm">
             <h2><a href="/authors/{{ n.id }}">{{ n.full_name }}</a></h2>
+        </div>
+        <div class="col-sm-12 col-xs-12 hidden-md">
+            <h4><a href="/authors/{{ n.id }}">{{ n.full_name }}</a></h4>
         </div>
     </div>
 	</div>
 	{% endfor %}
 </div>
 
-<div class="row pagination centered find_an_author" id="find_an_author"><h4 class="text-right visible-sm"
-                                                                            style="margin-top:20px;"></h4>
+<div class="row pagination centered find_an_author hidden-xs hidden-sm" id="find_an_author">
+	<h4 class="text-right visible-sm" style="margin-top:20px;"></h4>
     <ul>
         <li class="disabled title hidden-sm"></li>
         <li class="disabled"><a href="/author_list/ا"
@@ -121,6 +124,11 @@
         <li class="disabled"><a href="/author_list/ی"
                         name="&amp;lpos=us-noted-authors-homepage">ی</a></li>
     </ul>
+</div>
+<div class="row pagination centered find_an_author hidden-md hidden-lg" id="find_an_author">
+	<a href="/all_author" style="float:left; margin-top:10px;">
+		سایر ِپدیدآورنده‌گان
+	</a>
 </div>
 </div>
 

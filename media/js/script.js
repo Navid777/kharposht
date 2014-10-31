@@ -88,4 +88,13 @@ window.navid_resize_book_shelves = function () {
     });
 };
 
-
+window.mobile_resize_book_shelves = function(){
+	a = $('<a class="see_more">ادامه</a>').attr("href", "#");
+	new_height = 800;
+	new_height2 = 400;
+	$(".m-book-shelf-book").dotdotdot({
+		after: a,
+		height: new_height
+	});
+	
+};

@@ -42,6 +42,28 @@ def search(request, term):
         'authors': authors,
         'term':term,
     })
+
+def m_search(request):
+    term = request.GET['search']
+    books = Book.objects.filter(Q(title__contains=term)|Q(description__contains=term))
+    authors = Author.objects.filter(Q(first_name__contains=term)|Q(last_name__contains=term)|Q(description__contains=term))
+    if not books :
+        book_width = 0
+    elif books.count() == 1:
+        book_width = 12
+    elif books.count() == 2:
+        book_width = 6
+    elif books.count() == 3:
+        book_width = 4
+    else:
+        book_width = 3
+    return render(request, 'search.html', {
+        'book': book,
+        'books': books,
+        'book_width': book_width,
+        'authors': authors,
+        'term':term,
+    })
     
 
 def author(request, id):

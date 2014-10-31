@@ -26,6 +26,12 @@ h3 {
     padding-top: 30px;
     padding-bottom: 30px;
 }
+h4 {
+    font-weight: bold;
+    font-size: 24px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
 
 body {
     background: url('../img/body-bg.jpg') repeat scroll 0 0;
@@ -109,11 +115,45 @@ header .navbar {
     margin-bottom: 0;
 }
 
+#navbar-main-sm {
+    margin-bottom: 0;
+    margin-top:5%;
+}
+
 #navbar-main .container > div {
     border: 1px solid white;
     border-radius: 4px;
 }
 
+#navbar-main-sm .container > div {
+    border: 1px solid white;
+    border-radius: 4px;
+}
+#navbar-main-sm .container > div > div> .navbar-form {
+	border:none;   
+    border-top: 1px solid white;
+}
+#navbar-main-sm .container > div > div > button{
+	border: 1px solid white;
+	margin:0;
+	margin-left:10px;
+	position:absolute;
+	bottom:11px;
+	right:6px;
+}
+#navbar-main-sm .container > div > div{
+	position:relative;
+}
+#navbar-main-sm .container > div > div > a{
+	margin:0;
+	margin-top:2%;
+	padding:0;
+	float:left;
+}
+
+#collapseOne > ul > li {
+	margin-top: 8px;
+}
 #navbar-main > div > div > div > ul > li a {
     font-size: 18px;
     color: #333333;
@@ -168,6 +208,10 @@ header .navbar {
 }
 
 .book-shelf h3 {
+    color: #E0EFD3;
+    text-shadow: 1px 1px 1px #000000;
+}
+.book-shelf h4 {
     color: #E0EFD3;
     text-shadow: 1px 1px 1px #000000;
 }
