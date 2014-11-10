@@ -10,7 +10,7 @@
 		<div class="col-sm-6 col-md-6 centered">
 			<div class="col-sm-4 col-md-4 navid-book-shelf-book m-book-shelf-book">
 					{% ifequal mode 1%}
-					<a  href="/books/{{ b.id }}/">
+					<a  href="/books/{{ b.id }}">
 						{% if b.image %}
 	                    <img alt="{{ b.title }}" class="hidden-sm"
 	                         src="{{ b.image.url }}">
@@ -25,7 +25,7 @@
 	                </a>
 	                {% endifequal %}
 	                {% ifequal mode 2%}
-					<a  href="/article/{{ b.id }}/">
+					<a  href="/article/{{ b.id }}">
 						{% if b.image %}
 	                    <img alt="{{ b.title }}" class="hidden-sm"
 	                         src="{{ b.image.url }}">
@@ -40,7 +40,7 @@
 	                </a>
 	                {% endifequal %}
 	                {% ifequal mode 3%}
-					<a  href="/news/{{ b.id }}/">
+					<a  href="/news/{{ b.id }}">
 						{% if b.image %}
 	                    <img alt="{{ b.title }}" class="hidden-sm"
 	                         src="{{ b.image.url }}">
@@ -56,7 +56,7 @@
 	                {% endifequal %}
 				<div class="title centered">
 					{% ifequal mode 1%}
-                    <a href="/books/{{ b.id }}/">
+                    <a href="/books/{{ b.id }}">
                         <strong>{{ b.title }}</strong>
                     </a>
                     {% endifequal %}
